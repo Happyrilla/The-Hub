@@ -3,6 +3,11 @@
   const l = localStorage.getItem("paniclink");
 
   window.addEventListener("keydown", e => {
-    if (e.key.toLowerCase() === b) window.location.href = l;
-  });
+    if (e.key.toLowerCase() === b) {
+      if (sentence.includes("https://")) {
+        window.location.href = l;
+      } else {
+        window.location.href = "https://" + l;
+      }
+}});
 })();
