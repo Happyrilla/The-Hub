@@ -8,6 +8,7 @@
         <script src="../js/customizer.js"></script>
         <link rel="icon" type="image/png" href="https://www.gstatic.com/images/branding/searchlogo/ico/favicon.ico"/>
         <script src="https://kit.fontawesome.com/19b444568b.js" crossorigin="anonymous"></script>
+        <script src="/The-Hub/js/panic.js"></script>
     </head>
     <body>
         <div id="sub">
@@ -35,10 +36,12 @@
                 <h2 style="margin-top: 20px;">Panic System</h2>
                 <form>
                     <input type="text" placeholder="button" onkeyup="setpanicbutton(this.value)" class="form"></input>
+                    <input type="text" placeholder="link" onkeyup="setpaniclink(this.value)" class="form"></input>
                 </form>
             </div>
         </div>
         <script>function setTitle(value) {document.title = value || "Google"; localStorage.setItem("title", value)};</script>
         <script>function setmedia(value) {localStorage.setItem("media", value)};</script>
-        <script>function setpanic(value) {localStorage.setItem("panic", value)};</script>
+        <script>function setpanicbutton(value) {localStorage.setItem("panicbutton", value)};</script>
+        <script>function setpaniclink(value) {localStorage.setItem("paniclink", value)};</script>
     </body>
