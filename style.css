@@ -195,6 +195,10 @@
     font-weight: 800;
     padding: 10
 }
+body a {
+    outline: none;
+    text-decoration: none;
+}
 body {
     font-family: "Roboto";
     background-color: #5e7594;
