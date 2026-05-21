@@ -9,6 +9,15 @@
             background-image: url('./moto background.png');
         }
     </style>
+    <script>
+        window.RufflePlayer = window.RufflePlayer || {};
+        window.RufflePlayer.config = {
+            "autoplay": "on",
+            "warnOnUnsupportedContent": false
+        };
+    </script>
+
+    <script src="../ruffle/ruffle.js"></script>
 </head>
 
 <body style="margin:0; display:flex; justify-content:center; align-items:center; height:100vh;">
@@ -16,7 +25,7 @@
         <i class="fa-solid fa-left-long"></i> back
     </a>
     <div id="container">
-        <embed src="moto-x3m-17780bee1.swf" width="770" height="580"></embed>
+        <embed src="moto-x3m-17780bee1.swf" width="770" height="580" type="application/x-shockwave-flash">
     </div>
 </body>
 </html>
