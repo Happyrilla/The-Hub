@@ -17,10 +17,7 @@
     document.getElementById('btn').addEventListener('click', async () => {
       const q = document.getElementById('q').value || 'matrix';
 
-      const res = await fetch(
-        `/.netlify/functions/tmdb?q=${encodeURIComponent(q)}`
-      );
-
+      const res = await fetch(`/.netlify/functions/tmdb?q=${encodeURIComponent(q)}`);
       const data = await res.json();
 
       const list = document.getElementById('out');
