@@ -1,6 +1,6 @@
 // i found this script online. this isnt mine. you can take it if you want
 document.addEventListener("DOMContentLoaded", function () {
-  fetch("/The-Hub/assets/facts.JSON")
+  fetch("../assets/facts.JSON")
     .then((response) => response.json())
     .then((data) => {
       const randomQuote = data[Math.floor(Math.random() * data.length)];
