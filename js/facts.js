@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const isGitHubPages = window.location.hostname.includes("github.io");
   const basePath = isGitHubPages ? "/The-Hub" : "";
 
-  fetch(`${basePath}/assets/facts.json`)
+  fetch(`${basePath}/assets/facts.JSON`)
     .then((response) => response.json())
     .then((data) => {
 
