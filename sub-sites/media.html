@@ -28,9 +28,10 @@
       container.innerHTML = '';
 
       (data.results || []).forEach(movie => {
+
         const poster = movie.poster_path
           ? `https://image.tmdb.org/t/p/w300${movie.poster_path}`
-          : '';
+          : "https://via.placeholder.com/300x450?text=No+Image";
 
         const card = document.createElement('div');
 
