@@ -211,9 +211,10 @@
     height: 200px;
     border-radius: 10px;
     transition: all 0.35s ease;
+    opacity: 0;
 }
 linksy:hover {
-    transform: scale(1.1);
+    opacity: 1;
 }
 body a {
     outline: none;
