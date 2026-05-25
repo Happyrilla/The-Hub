@@ -12,13 +12,11 @@
             flex-wrap: wrap;
             justify-content: center;
             align-items: center;
-            margin-top: 9vh;
+            margin-top: 5vh;
             gap: 30px;
             flex-direction: column;
         }
         .thing {
-            width: 300;
-            height: 300;
             transition: all 0.3s ease;
         }
         .thing:hover {
@@ -37,7 +35,7 @@
     <div class="things">
         <h2 style="font-size: 4rem;">Click to copy the icon links</h2>
         <br>
-        <img src="https://www.youtube.com/s/desktop/5af4fee3/img/favicon.ico" alt="Youtube logo" onclick="clipboard('https://www.youtube.com/s/desktop/5af4fee3/img/favicon.ico')">
+        <img src="https://www.youtube.com/s/desktop/5af4fee3/img/favicon.ico" alt="Youtube logo" height="300" width="300" onclick="clipboard('https://www.youtube.com/s/desktop/5af4fee3/img/favicon.ico')">
     </div>
     <script>function clipboard(value) {navigator.clipboard.writeText(value);};</script>
 </body>
