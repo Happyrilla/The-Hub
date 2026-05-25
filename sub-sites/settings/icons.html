@@ -1,0 +1,43 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>icons</title>
+    <link rel="stylesheet" href="../../style.css">
+    <script src="../../js/customizer.js"></script>
+    <link rel="icon" type="image/png" href="https://www.gstatic.com/images/branding/searchlogo/ico/favicon.ico"/>
+    <script src="https://kit.fontawesome.com/19b444568b.js" crossorigin="anonymous"></script>
+    <style>
+        .things {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            margin-top: 9vh;
+            gap: 30px;
+        }
+        .thing {
+            width: 300;
+            height: 300;
+            transition: all 0.3s ease;
+        }
+        .thing:hover {
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+    <div id="sub">
+        <a href="/index.html" style="margin-left: 10px;"> <i class="fa-regular fa-face-smile"></i> The Hub</a>
+        <a href="../../sub-sites/games.html"><span><i class="fa-solid fa-gamepad" style="font-size: 30px;"></i> Games</span></a>
+        <a href="../../sub-sites/links.html"><i class="fa-solid fa-link"></i> Links</a>
+        <a href="../../sub-sites/media.html"><i class="fa-solid fa-tv"></i> Media</a>
+        <a href="../../sub-sites/settings.html"> <i class="fa-solid fa-gear"></i> Settings</a>
+    </div>
+    <div class="things">
+        <h2 style="font-size: 4rem;">Click to copy the icon links</h2>
+        <br>
+        <img src="https://www.youtube.com/s/desktop/5af4fee3/img/favicon.ico" alt="Youtube logo" onclick="clipboard('https://www.youtube.com/s/desktop/5af4fee3/img/favicon.ico')">
+    </div>
+    <script>function clipboard(value) {navigator.clipboard.writeText(value);};</script>
+</body>
+</html>
