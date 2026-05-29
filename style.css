@@ -221,7 +221,7 @@ body a {
     text-decoration: none;
 }
 body {
-    font-family: "Roboto";
+    font-family: "./fonts/Cat Song.otf";
     background-color: #5e7594;
     color: white;
     user-select: none;
