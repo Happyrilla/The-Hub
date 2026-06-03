@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hobo 5</title>
+    <link rel="icon" href="hobo5 logo.png" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/19b444568b.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background-image: url('./hobo5 background.png');
+        }
+    </style>
+    <script>
+        window.RufflePlayer = window.RufflePlayer || {};
+        window.RufflePlayer.config = {
+            "autoplay": "on",
+            "warnOnUnsupportedContent": false
+        };
+    </script>
+
+    <script src="../ruffle/ruffle.js"></script>
+</head>
+
+<body style="margin:0; display:flex; justify-content:center; align-items:center; height:100vh;">
+    <a href="../../sub-sites/games.html" style="position: absolute; top: 5%; left: 1%; text-decoration: none; border: none; font-size: 40px; display: flex; align-items: center; gap: 8px;">
+        <i class="fa-solid fa-left-long"></i> back
+    </a>
+    <div id="container">
+        <embed src="hobo5.swf" width="770" height="580" type="application/x-shockwave-flash"></embed>
+    </div>
+    <div>
+        <textarea id="textBox" placeholder="password saver input" style="resize: none; overflow: auto"></textarea>
+        <a style="font-weight: bold; font-size: 1rem; color: white;">password holder that saves!</a>
+    </div>
+    <script>
+        const ta = document.getElementById('textBox');
+        ta.value = localStorage.getItem('savedTexttttt') || '';
+        ta.addEventListener('input', () => {
+        localStorage.setItem('savedTexttttt', ta.value);
+        });
+    </script>
+</body>
+</html>
