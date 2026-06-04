@@ -1,7 +1,7 @@
 let idk = localStorage.getItem("title")
 let favi = localStorage.getItem("favicon")
 function setTitle(value) {document.title = value || "Google";}
-function setfavicon(icon) { (document.querySelector("link[rel*='icon']") || Object.assign(document.head.appendChild(document.createElement('link')), {rel: 'icon'})).href = icon; }
+function setfavicon(icon) { (document.querySelector("link[rel='icon']") = icon)}
 if (idk === null) {
     setTitle("Google")
 } else {
