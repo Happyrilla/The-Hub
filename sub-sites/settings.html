@@ -64,6 +64,11 @@
         document.addEventListener('DOMContentLoaded', () => {
             if(!localStorage.getItem("panicbutton")) localStorage.setItem("panicbutton", null); 
             if(!localStorage.getItem("paniclink")) localStorage.setItem("paniclink", null);
+            // Populate input fields with saved values
+            const savedTitle = localStorage.getItem("title");
+            const savedFavicon = localStorage.getItem("favicon");
+            if(savedTitle) document.querySelectorAll("input[placeholder='Title']")[0].value = savedTitle;
+            if(savedFavicon) document.querySelectorAll("input[placeholder='Icon']")[0].value = savedFavicon;
         });
         function setmedia(value) { localStorage.setItem("media", value); }
         function setpanicbutton(value) { localStorage.setItem("panicbutton", value); }
