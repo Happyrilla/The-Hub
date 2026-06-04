@@ -73,8 +73,21 @@
         function setmedia(value) { localStorage.setItem("media", value); }
         function setpanicbutton(value) { localStorage.setItem("panicbutton", value); }
         function setpaniclink(value) { localStorage.setItem("paniclink", value); }
-        function setTitle(value) { document.title = value; localStorage.setItem("title", value); }
-        function setfavicon(value) {localStorage.setItem("favicon", value); document.querySelector("link[rel='icon']").href = value;}
+        function setTitle(value) { 
+            document.title = value || "Google"; 
+            localStorage.setItem("title", value); 
+        }
+        function setfavicon(value) {
+            localStorage.setItem("favicon", value);
+            // Update the favicon in the DOM
+            let iconLink = document.querySelector("link[rel*='icon']");
+            if (!iconLink) {
+                iconLink = document.createElement('link');
+                iconLink.rel = 'icon';
+                document.head.appendChild(iconLink);
+            }
+            iconLink.href = value;
+        }
     </script>
 </body>
 </html>
