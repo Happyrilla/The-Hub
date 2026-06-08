@@ -7,6 +7,18 @@
     <link rel="icon" type="image/png" href="https://www.gstatic.com/images/branding/searchlogo/ico/favicon.ico"/>
     <script src="https://kit.fontawesome.com/19b444568b.js" crossorigin="anonymous"></script>
     <title>Request games</title>
+    <style>
+        .smm {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        }
+        .smmall {
+            padding: 10;
+        }
+    </style>
 </head>
 <body>
     <div id="sub">
@@ -16,6 +28,10 @@
         <a href="../sub-sites/media.html"><i class="fa-solid fa-tv"></i> Media</a>
         <a href="../sub-sites/settings.html"> <i class="fa-solid fa-gear"></i> Settings</a>
         </div>
-    <form id="contactForm" action="https://formspree.io/f/xgobebez" method="POST" style="display: flex; justify-content: center; flex-direction: column; align-items: center;"> <input name="message" type="text" placeholder="Type your message" required> <input name="_replyto" type="email" placeholder="Your email (optional)"> <button type="submit">Send</button></form> 
+    <form id="contactForm" action="https://formspree.io/f/xgobebez" method="POST" class="smm">
+        <input name="message" type="text" placeholder="Type your message" class="smmall" required>
+        <input name="person" type="text" placeholder="Your name" class="smmall" required>
+        <button type="submit">Send</button>
+    </form> 
 </body>
 </html>
