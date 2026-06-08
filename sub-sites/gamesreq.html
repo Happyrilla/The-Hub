@@ -9,14 +9,21 @@
     <title>Request games</title>
     <style>
         .smm {
-        margin-top: 20px;
         display: flex;
         justify-content: center;
         flex-direction: column;
         align-items: center;
+        height: 70vh;
         }
         .smmall {
-            padding: 10;
+            width: 20rem;
+            height: 4rem;
+        }
+        .smmm {
+            margin-top: 30px;
+            width: 3rem;
+            height: 4rem;
+            background-color: rgb(0, 214, 0);
         }
     </style>
 </head>
@@ -31,7 +38,7 @@
     <form id="contactForm" action="https://formspree.io/f/xgobebez" method="POST" class="smm">
         <input name="message" type="text" placeholder="Type your message" class="smmall" required>
         <input name="person" type="text" placeholder="Your name" class="smmall" required>
-        <button type="submit">Send</button>
+        <button type="submit" class="smmm">Send</button>
     </form> 
 </body>
 </html>
