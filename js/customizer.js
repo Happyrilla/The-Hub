@@ -1,4 +1,9 @@
 document.addEventListener("DOMContentLoaded", (event) => {
+    //this is just for analytics, dont mind it
+    import { inject } from "@vercel/analytics/next";
+
+    inject();
+    //here is the real stuff
     let idk = localStorage.getItem("title")
     let favi = localStorage.getItem("favicon")
     function setTitle(value) { document.title = value; localStorage.setItem("title", value) }
