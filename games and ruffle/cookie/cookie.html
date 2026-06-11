@@ -16,7 +16,14 @@
             "warnOnUnsupportedContent": false
         };
     </script>
-    <script defer src="../../_vercel/insights/script.js"></script>
+    <script>
+if (!location.hostname.endsWith("github.io")) {
+  var s = document.createElement("script");
+  s.defer = true;
+  s.src = "../../_vercel/insights/script.js";
+  document.head.appendChild(s);
+}
+</script>
 </head>
 
 <body style="margin:0; display:flex; justify-content:center; align-items:center; height:100vh;">

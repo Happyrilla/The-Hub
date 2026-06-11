@@ -6,7 +6,14 @@
         <title>Google</title>
         <meta type="description" content="A website for those who want a break from school">
         <script src="./js/customizer.js"></script>
-        <script defer src="./_vercel/insights/script.js"></script>
+        <script>
+if (!location.hostname.endsWith("github.io")) {
+  var s = document.createElement("script");
+  s.defer = true;
+  s.src = "./_vercel/insights/script.js";
+  document.head.appendChild(s);
+}
+</script>
         <script src="js/facts.js"></script>
         <link rel="stylesheet" href="./style.css" />
         <link rel="icon" type="image/png" href="https://www.gstatic.com/images/branding/searchlogo/ico/favicon.ico"/>
