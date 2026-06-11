@@ -16,7 +16,6 @@
     gap: 1rem;
     cursor: default;
     margin: 10vh auto 0;
-    width: fit-content;
     font-weight: 700;
 }
 .title-main {
@@ -24,7 +23,7 @@
     transition: all 0.3s ease;
     transform-origin: center;
     text-align: center;
-    width: 100%;
+    width: fit-content;
 }
 .title-main:hover {
     transform: scale(1.1);
