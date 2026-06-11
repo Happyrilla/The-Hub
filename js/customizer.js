@@ -15,6 +15,3 @@ document.addEventListener("DOMContentLoaded", (event) => {
         setfavicon(favi)
     }
 })
-import { inject } from "@vercel/analytics";
-
-inject();
