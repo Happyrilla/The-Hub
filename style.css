@@ -16,7 +16,7 @@
     gap: 1rem;
     cursor: default;
     margin: 10vh auto 0;
-    width: min(100%, 1000px);
+    width: fit-content;
     font-weight: 700;
 }
 .title-main {
