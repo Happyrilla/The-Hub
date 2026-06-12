@@ -493,7 +493,15 @@ if (typeof document !== "undefined") {
   /**
    * Auto load
    */
-  VanillaTilt.init(document.querySelectorAll("[data-tilt]"));
+  const vanillaTiltInit = () => {
+    VanillaTilt.init(document.querySelectorAll("[data-tilt]"));
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", vanillaTiltInit);
+  } else {
+    vanillaTiltInit();
+  }
 }
 
 return VanillaTilt;
