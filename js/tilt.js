@@ -426,7 +426,7 @@ class VanillaTilt {
       startY: 0,
       perspective: 1000,
       easing: "cubic-bezier(.03,.98,.52,.99)",
-      scale: 1.6,
+      scale: 1.1,
       speed: 100,
       transition: true,
       axis: null,
