@@ -421,7 +421,7 @@ class VanillaTilt {
   extendSettings(settings) {
     let defaultSettings = {
       reverse: false,
-      max: 25,
+      max: 20,
       startX: 0,
       startY: 0,
       perspective: 1000,
