@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import fetch from 'node-fetch';
+import path from 'path';
 
 dotenv.config({ path: './assets/tmdb.env' });
 
@@ -8,7 +9,8 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const TMDB_KEY = process.env.TMDB_KEY;
 
-app.use(express.static('public'));
+// Serve static files from the project root so files like index.html and 404.html are available
+app.use(express.static(process.cwd()));
 
 app.get('/api/movies', async (req, res) => {
   const query = req.query.q || 'avengers';
@@ -23,3 +25,8 @@ app.get('/api/movies', async (req, res) => {
 });
 
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+
+// Fallback: send the project's 404.html for any unknown route (returns 404 status)
+app.use((req, res) => {
+  res.status(404).sendFile(path.join(process.cwd(), '404.html'));
+});

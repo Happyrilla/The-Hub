@@ -1,4 +1,8 @@
 {
+  "type": "module",
+  "scripts": {
+    "start": "node js/tmdb.js"
+  },
   "dependencies": {
     "@vercel/analytics": "^2.0.1"
   }
