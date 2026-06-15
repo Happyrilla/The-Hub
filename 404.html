@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page Not Found</title>
+  <link rel="stylesheet" href="./style.css" />
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      background: #111;
+      color: #fff;
+      text-align: center;
+      font-family: system-ui, sans-serif;
+    }
+    .error-container {
+      max-width: 640px;
+      padding: 32px;
+    }
+    .error-container h1 {
+      font-size: 4rem;
+      margin: 0 0 16px;
+    }
+    .error-container p {
+      font-size: 1.2rem;
+      margin: 0 0 24px;
+      opacity: 0.8;
+    }
+    .error-container a {
+      display: inline-block;
+      padding: 12px 24px;
+      border: 2px solid #fff;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 999px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .error-container a:hover {
+      background: #fff;
+      color: #111;
+    }
+  </style>
+</head>
+<body>
+  <div class="error-container">
+    <h1>404</h1>
+    <p>The page you are looking for does not exist.</p>
+    <a href="/index.html">Go back to The Hub</a>
+  </div>
+</body>
+</html>
