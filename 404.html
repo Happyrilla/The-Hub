@@ -49,7 +49,15 @@
   <div class="error-container">
     <h1>404 or whatever</h1>
     <p>You typed a wrong link</p>
-    <a href="./">Go back to The Hub</a>
+    <a onclick="goback()">Go back to The Hub</a>
   </div>
+  <script>
+    function goback() {
+      if (location.hostname.endsWith("github.io")) {
+      window.location.href = "/The-Hub";
+    } else {
+      window.location.href = "/"
+    }}
+  </script>
 </body>
 </html>
