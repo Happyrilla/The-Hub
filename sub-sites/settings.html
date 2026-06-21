@@ -6,19 +6,45 @@
     <title>Google</title>
     <link rel="stylesheet" href="../style.css" />
     <script src="../js/customizer.js" defer></script>
-    <link rel="icon" type="image/png" href="https://www.gstatic.com/images/branding/searchlogo/ico/favicon.ico"/>
+    <link rel="icon" type="image/png" href="https://www.gstatic.com/images/branding/searchlogo/ico/favicon.ico" />
     <script src="https://kit.fontawesome.com/19b444568b.js" crossorigin="anonymous"></script>
     <script src="../js/panic.js" defer></script>
     <script>
-if (!location.hostname.endsWith("github.io")) {
-  var s = document.createElement("script");
-  s.defer = true;
-  s.src = "../_vercel/insights/script.js";
-  document.head.appendChild(s);
-}
-</script>
+        if (!location.hostname.endsWith("github.io")) {
+            var s = document.createElement("script");
+            s.defer = true;
+            s.src = "../_vercel/insights/script.js";
+            document.head.appendChild(s);
+        }
+    </script>
     <style>
-       body {
+        #dialog {
+            background-color: #5e7594;
+            border-radius: 7%;
+        }
+        #dialogbtn {
+            width: fit-content;
+        }
+        .things {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            margin-top: 5vh;
+            gap: 5px;
+            flex-direction: column;
+        }
+
+        .thing {
+            transition: all 0.3s ease;
+        }
+
+        .thing:hover {
+            transform: scale(1.2);
+        }
+    </style>
+    <style>
+        body {
             background-image: url('https://luchenator.dev/assets/backgrounds/backgroundindex.gif');
             background-color: rgba(76, 20, 2, 0.25);
             background-blend-mode: multiply;
@@ -26,13 +52,15 @@ if (!location.hostname.endsWith("github.io")) {
             background-position: center;
             background-attachment: fixed;
             background-repeat: no-repeat;
-            } 
+        }
     </style>
 </head>
+
 <body>
     <div id="sub">
         <a href="../" style="margin-left: 10px;"> <i class="fa-regular fa-face-smile"></i> The Hub</a>
-        <a href="../sub-sites/games.html"><span><i class="fa-solid fa-gamepad" style="font-size: 30px;"></i> Games</span></a>
+        <a href="../sub-sites/games.html"><span><i class="fa-solid fa-gamepad" style="font-size: 30px;"></i>
+                Games</span></a>
         <a href="../sub-sites/links.html"><i class="fa-solid fa-link"></i> Links</a>
         <a href="../sub-sites/media.html"><i class="fa-solid fa-tv"></i> Media</a>
         <a href="../sub-sites/settings.html"> <i class="fa-solid fa-gear"></i> Settings</a>
@@ -43,7 +71,7 @@ if (!location.hostname.endsWith("github.io")) {
             <form onsubmit="return false;" style="display: flex; flex-direction: column;">
                 <input type="text" placeholder="Title" onkeyup="setTitle(this.value)" class="form">
                 <input type="text" placeholder="Icon" onchange="setfavicon(this.value.trim())" class="form">
-                <a href="./settings/icons.html" style="margin-top: 30px;">List of icons</a>
+                <button style="margin-top: 30px;" type="button" id="dialogbtn">List of icons</button>
             </form>
         </div>
         <div class="thingy">
@@ -57,7 +85,8 @@ if (!location.hostname.endsWith("github.io")) {
             <h2 style="margin-top: 20px;">Panic System</h2>
             <form style="display: flex; flex-direction: column;">
                 <input type="text" placeholder="button" onkeyup="setpanicbutton(this.value)" class="form">
-                <input type="text" placeholder="link (remember https://)" onkeyup="setpaniclink(this.value)" class="form">
+                <input type="text" placeholder="link (remember https://)" onkeyup="setpaniclink(this.value)"
+                    class="form">
             </form>
         </div>
         <div class="thingy">
@@ -67,20 +96,44 @@ if (!location.hostname.endsWith("github.io")) {
             </form>
         </div>
     </div>
+    <dialog id="dialog">
+        <form method="dialog">
+            <div class="things">
+                <h2 style="font-size: 2rem;">Click to copy the icon links</h2>
+                <br>
+                <img src="https://www.youtube.com/s/desktop/5af4fee3/img/favicon_144x144.png" alt="Youtube logo" height="60" width="60" onclick="clipboard('https://www.youtube.com/s/desktop/5af4fee3/img/favicon_144x144.png')">
+                <img src="https://github.githubassets.com/favicons/favicon-dark.png" height="60" width="60" onclick="clipboard('https://github.githubassets.com/favicons/favicon-dark.png')" alt="github logo">
+                <img src="https://archive.org/offshoot_assets/favicon.ico" height="60" width="60" onclick="clipboard('https://archive.org/offshoot_assets/favicon.ico')" alt="Archive.org logo">
+            </div>
+            <button id="closebtn">Close</button>
+        </form>
+    </dialog>
+    <script>
+        const btn = document.getElementById("dialogbtn");
+        const dialog = document.getElementById("dialog");
+        const closeBtn = document.getElementById("closeBtn");
 
+        if (btn && dialog) {
+            btn.addEventListener('click', () => {
+                dialog.showModal();
+            });
+        }
+        function clipboard(value) {navigator.clipboard.writeText(value);};
+    </script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            if(!localStorage.getItem("panicbutton")) localStorage.setItem("panicbutton", null); 
-            if(!localStorage.getItem("paniclink")) localStorage.setItem("paniclink", null);
+            if (!localStorage.getItem("panicbutton")) localStorage.setItem("panicbutton", null);
+            if (!localStorage.getItem("paniclink")) localStorage.setItem("paniclink", null);
         });
         function setmedia(value) { localStorage.setItem("media", value); }
         function setpanicbutton(value) { localStorage.setItem("panicbutton", value); }
         function setpaniclink(value) { localStorage.setItem("paniclink", value); }
-        function setTitle(value) { 
-            document.title = value || "Google"; 
-            localStorage.setItem("title", value); 
+        function setTitle(value) {
+            document.title = value || "Google";
+            localStorage.setItem("title", value);
         }
-        function setfavicon(value) {const sm = value; document.querySelector("link[rel='icon']").href = sm; localStorage.setItem("favicon", sm)}
+        function setfavicon(value) { const sm = value; document.querySelector("link[rel='icon']").href = sm; localStorage.setItem("favicon", sm) }
     </script>
 </body>
+
 </html>
