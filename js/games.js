@@ -1,10 +1,14 @@
-function gamer(value) {
-    fetch("/api/test")
-    .then(res => res.json())
-    .then(data => {
-    if (value === data.value) {
-        window.location.href = "../sub-sites/devdash.html";
+function search() {
+  let searchbarVal = document.querySelector(".searchbar").value.toLowerCase();
+  let games = document.getElementsByClassName("gamesy");
+
+  for (let i = 0; i < games.length; i++) {
+    let name = games[i].dataset.name.toLowerCase();
+
+    if (name.includes(searchbarVal)) {
+      games[i].style.display = "inline-block";
     } else {
-        localStorage.setItem("iscool?", "yes")
+      games[i].style.display = "none";
     }
-  })};
+  }
+}
