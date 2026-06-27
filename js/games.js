@@ -1,14 +1,10 @@
-function search() {
-  let searchbarVal = document.querySelector(".searchbar").value.toLowerCase();
-  let games = document.getElementsByClassName("gamesy");
+function search(value) {
+  const searchInput = document.querySelector(".searchbar") || document.getElementById("search");
+  const searchbarVal = (value ?? searchInput?.value ?? "").toLowerCase().trim();
+  const games = document.getElementsByClassName("gamesy");
 
   for (let i = 0; i < games.length; i++) {
-    let name = games[i].dataset.name.toLowerCase();
-
-    if (name.includes(searchbarVal)) {
-      games[i].style.display = "inline-block";
-    } else {
-      games[i].style.display = "none";
-    }
+    const name = (games[i].dataset.name || "").toLowerCase();
+    games[i].style.display = name.includes(searchbarVal) ? "inline-block" : "none";
   }
 }
