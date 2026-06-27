@@ -104,6 +104,18 @@
     flex-wrap: wrap;
 }
 
+.searchbar-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.searchbar {
+    width: min(90%, 400px);
+    padding: 10px 12px;
+    margin-bottom: 8px;
+}
+
 .gamesy {
     width: 175px;
     height: 175px;
