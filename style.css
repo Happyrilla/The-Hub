@@ -51,6 +51,10 @@
     margin: 0 auto;
     gap: 10rem;
     cursor: default;
+    opacity: 0.7;
+}
+#sub:hover {
+    opacity: 1;
 }
 #sub a {
     font-size: 70%;
@@ -110,10 +114,23 @@
     justify-content: center;
 }
 
+.searchbar::placeholder {color: white; font-family: "Cat Song";}
+
 .searchbar {
-    width: min(90%, 400px);
-    padding: 10px 12px;
+    display: block;
+    transition: all 0.4s ease;
+    width: 25rem;
+    height: 3rem;
+    border-radius: 15px;
+    border-width: 1px;
+    background-color: #5e7594;
     margin-bottom: 8px;
+    opacity: 0.7;
+}
+
+.searchbar:hover {
+    opacity: 0.9;
+    transform: scale(1.12);
 }
 
 .gamesy {
