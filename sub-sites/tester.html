@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" id="test">
+<head>
+    <meta charset="UTF-8">
+    <title>Html tester</title>
+    <style>
+        #wrapper {
+            font-size: 5rem;
+            display: flex;
+            text-align: center;
+            justify-content: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        #wrapper input {
+            margin-bottom: 5rem;
+        }
+        #inside-wrapper {
+            
+            width: 50rem;
+            height: 30rem;
+            border-radius: 5px;
+            border: 1px solid black;
+        }
+        textarea {
+            width: 70%;
+            height: 10rem;
+        }       
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <textarea id="input" oninput="change(this.value)"><input id="input"></textarea>
+        <div id="inside-wrapper">
+            <span id="inside"></span>
+        </div>
+    </div>
+    <script>
+        const spa = document.getElementById("inside")
+        var input = document.getElementById("input")
+        var test = document.getElementById("test")
+
+        try {input.value = test.innerHTML} catch (error) {console.error("error")}
+        function change(value) {
+            test.innerHTML = value
+        }
+    </script>
+</body>
+</html>
