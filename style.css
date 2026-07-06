@@ -251,6 +251,31 @@
 linksy:hover {
     opacity: 1;
 }
+
+.req {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 10px;
+}
+
+.reqbtn {
+    background-color: #7a8fab;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    border-radius: 8px;
+    transition: all 0.15s ease;
+}
+
+.reqbtn :hover {
+    transform: scale(1.2);
+}
+
 body a {
     outline: none;
     text-decoration: none;
