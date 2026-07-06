@@ -37,13 +37,21 @@
     </div>
     <script>
         const spa = document.getElementById("inside")
-        var input = document.getElementById("input")
-        var test = document.getElementById("test")
-
-        try {input.value = test.innerHTML} catch (error) {console.error("error")}
         function change(value) {
-            test.innerHTML = value
+            spa.innerHTML = value
         }
+
+        function handleHash() {
+            const hash = window.location.hash.slice(1)
+            if (!hash) {console.log("no hash")}
+            console.log(hash)
+            if (hash === "hello") {
+                console.log("hii")
+            }
+        }
+
+        window.addEventListener("hashchange", handleHash)
+        window.addEventListener("DOMContentLoaded", handleHash)
     </script>
 </body>
 </html>
