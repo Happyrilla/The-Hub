@@ -228,7 +228,73 @@
     text-decoration: none;
     font-size: 25px;
     font-weight: 800;
-    padding: 10
+    padding: 10;
+    width: fit-content;
+}
+.custom-link-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+.linko,
+#linko {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #c66767;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 0 auto;
+    transition: transform 0.2s ease;
+    overflow: hidden;
+}
+.linko:hover,
+#linko:hover {
+    transform: scale(1.1);
+}
+.linko a,
+#linko a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: white;
+    font-size: 12px;
+    line-height: 1.1;
+}
+.link-favicon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    display: block;
+}
+.link-label {
+    color: white;
+    font-size: 12px;
+    max-width: 70px;
+    line-height: 1.1;
+    text-align: center;
+    word-break: break-word;
+}
+#dialog {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    background-color: #5e7594;
+    border: 2px;
+    border-radius: 5px;
+    width: 512px;
+    height: 279px;
+    color: white;
+}
+#dialog[open] {
+    display: flex;
 }
 .links {
     display: flex;

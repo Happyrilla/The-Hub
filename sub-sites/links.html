@@ -1,8 +1,10 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Google</title>
     <script src="../js/customizer.js"></script>
+    <script src="../js/links.js"></script>
     <link rel="stylesheet" href="../style.css">
     <link rel="icon" type="image/png" href="https://www.gstatic.com/images/branding/searchlogo/ico/favicon.ico"/>
     <script src="https://kit.fontawesome.com/19b444568b.js" crossorigin="anonymous"></script>
@@ -36,12 +38,35 @@ if (!location.hostname.endsWith("github.io")) {
     </div>
     <br>
     <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 70vh; gap: 20px; text-align: center;">
-        <h2>Links to other domains</h2>
-        <br>
-        <a href="https://happyrilla.github.io/The-Hub/" target="_blank" class="dashy">The Hub link 1</a>
-        <a href="https://the-hubb.vercel.app/" target="_blank" class="dashy">The Hub link 2 (best)</a>
-        <a href="https://the-hubb.netlify.app/" target="_blank" class="dashy">The Hub link 3 (most of the time dosent work)</a>
-        <a href="https://the-hub-xt1t.onrender.com/" target="_blank" class="dashy">The Hub link 4</a>
+        <select id="sectionPicker" onchange="pick(this.value)" style="margin-bottom: 10px;">
+            <option value="1" selected>Other Domains</option>
+            <option value="2">Custom Links</option>
+        </select>
+        <div id="1" style="display: flex; flex-direction: column; align-items: center; gap: 12px;">
+            <h2>Links to other domains</h2>
+            <br>
+            <a href="https://happyrilla.github.io/The-Hub/" target="_blank" class="dashy">The Hub link 1</a>
+            <a href="https://the-hubb.vercel.app/" target="_blank" class="dashy">The Hub link 2 (best)</a>
+            <a href="https://the-hubb.netlify.app/" target="_blank" class="dashy">The Hub link 3 (most of the time dosent work)</a>
+            <a href="https://the-hub-xt1t.onrender.com/" target="_blank" class="dashy">The Hub link 4</a>
+        </div>
+        <div id="2" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;">
+            <h2>Custom Links</h2>
+            <div style="display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap;">
+                <div id="customLinksList" style="display: flex; flex-direction: row; align-items: center; gap: 12px; flex-wrap: wrap;"></div>
+                <div id="linko" onclick="addlink()"><a>Add Link</a></div>
+            </div>
+        </div>
+        <dialog id="dialog">
+            <form id="customLinkForm">
+                <a>Add a Custom Link</a>
+                <h5>Name</h5>
+                <input id="customLinkName" type="text" required>
+                <h5>Link</h5>
+                <input id="customLinkUrl" type="text" required>
+                <button type="submit">enter</button>
+            </form>
+        </dialog>
     </div>
 </body>
 </html>
