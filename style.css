@@ -297,7 +297,7 @@
 #dialog[open] {
     display: flex;
 }
-#dialog button {
+#dialog button, #dialog h2 {
     position: fixed;
 }
 .links {
