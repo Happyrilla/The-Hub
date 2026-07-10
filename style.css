@@ -297,6 +297,9 @@
 #dialog[open] {
     display: flex;
 }
+#dialog * {
+    position: fixed;
+}
 .links {
     display: flex;
     justify-content: center;
