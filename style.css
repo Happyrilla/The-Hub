@@ -230,7 +230,6 @@
     font-weight: 800;
     padding: 10px;
     width: fit-content;
-    cursor: pointer;
 }
 .custom-link-item {
     display: flex;
@@ -341,6 +340,7 @@ linksy:hover {
     font-size: 20px;
     border-radius: 8px;
     transition: all 0.15s ease;
+    cursor: pointer;
 }
 
 .reqbtn :hover {
