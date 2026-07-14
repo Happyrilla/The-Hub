@@ -36,6 +36,9 @@ if (!location.hostname.endsWith("github.io")) {
             const iframe = document.getElementById('myFrame');
 
             input.addEventListener('change', () => {
+                if (!input.value.startsWith('https://')) {
+                    input.value = 'http://' + input.value;
+                }
                 iframe.src = input.value;
             });
         });

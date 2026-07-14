@@ -230,6 +230,7 @@
     font-weight: 800;
     padding: 10px;
     width: fit-content;
+    cursor: pointer;
 }
 .custom-link-item {
     display: flex;
