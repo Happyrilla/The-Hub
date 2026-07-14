@@ -16,13 +16,15 @@ document.addEventListener("DOMContentLoaded", function () {
         factEl.innerHTML = randomQuote;
       };
 
-      if (typeof window.updateBatteryStatus === "function") {
-        window.updateBatteryStatus();
-      } else {
-        setRandomFact();
-      }
+      setRandomFact();
 
-      factEl.addEventListener("click", setRandomFact);
+      factEl.addEventListener("click", () => {
+        if (typeof window.updateBatteryStatus === "function") {
+          window.updateBatteryStatus();
+        } else {
+          setRandomFact();
+        }
+      });
 
     })
     .catch(() => {
