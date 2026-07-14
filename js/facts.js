@@ -11,9 +11,29 @@ document.addEventListener("DOMContentLoaded", function () {
     .then((response) => response.json())
     .then((data) => {
 
+      const batteryFactText = "your battery percentage is:";
+      const isBatteryFact = (quote) =>
+        typeof quote === "string" && quote.trim().toLowerCase() === batteryFactText.toLowerCase();
+
       const setRandomFact = () => {
         const randomQuote = data[Math.floor(Math.random() * data.length)];
-        factEl.innerHTML = randomQuote;
+
+        if (isBatteryFact(randomQuote)) {
+          if ("getBattery" in navigator) {
+            navigator.getBattery()
+              .then((battery) => {
+                const percentage = Math.round(battery.level * 100);
+                factEl.textContent = batteryFactText + " " + percentage + "%";
+              })
+              .catch(() => {
+                factEl.textContent = batteryFactText + " unavailable";
+              });
+          } else {
+            factEl.textContent = batteryFactText + " unavailable";
+          }
+        } else {
+          factEl.innerHTML = randomQuote;
+        }
       };
 
       setRandomFact();
