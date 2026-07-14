@@ -40,7 +40,7 @@ if (!location.hostname.endsWith("github.io")) {
         </div>
         <div class="title">
             <a class="title-main">The Hub</a>
-            <a id="fact" style="font-size: 1rem;" onclick="updateBatteryStatus()">not done</a>
+            <a id="fact" style="font-size: 1rem;">not done</a>
         </div>
         <div class="quick">
             <a href="./sub-sites/media.html" class="quicksy"><img src="assets/the hub media.png" class="pluh" data-tilt></img></a>
@@ -49,21 +49,27 @@ if (!location.hostname.endsWith("github.io")) {
         <a style="transform: translate(-50%, -50%); top: 98%; left: 6%; position: absolute;">happyrilla was here</a>
         <div class="req"><button class="reqbtn" onclick="window.location.href='./sub-sites/gamesreq.html'">Find an error?</button></div>
         <script>
-            if ('getBattery' in navigator) {
-                navigator.getBattery().then(battery => {
-                    function updateBatteryStatus() {
+            window.updateBatteryStatus = function () {
+                const factEl = document.getElementById('fact');
+                if (!factEl) return;
+
+                if (!('getBattery' in navigator)) {
+                    factEl.textContent = 'battery info unavailable';
+                    return;
+                }
+
+                navigator.getBattery().then((battery) => {
+                    const update = () => {
                         const percentage = Math.round(battery.level * 100);
-                        thing = document.getElementById('fact');
-                        if (thing.textContent.includes("your battery percentage is:")) {
-                            thing.textContent = "your battery percentage is: " + percentage + "%";
-                        }
-                    }
-                    battery.addEventListener('levelchange', updateBatteryStatus);
-                    if (thing.textContent.includes("your battery percentage is:")) {
-                        updateBatteryStatus();
-                    }
+                        factEl.textContent = 'your battery percentage is: ' + percentage + '%';
+                    };
+
+                    battery.addEventListener('levelchange', update);
+                    update();
+                }).catch(() => {
+                    factEl.textContent = 'battery info unavailable';
                 });
-            }
+            };
         </script>
 </body> 
 </html>

@@ -3,25 +3,30 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const isGitHubPages = window.location.hostname.includes("github.io");
   const basePath = isGitHubPages ? "/The-Hub" : "";
+  const factEl = document.getElementById("fact");
+
+  if (!factEl) return;
 
   fetch(`${basePath}/assets/facts.JSON`)
     .then((response) => response.json())
     .then((data) => {
-
-      const factEl = document.getElementById("fact");
 
       const setRandomFact = () => {
         const randomQuote = data[Math.floor(Math.random() * data.length)];
         factEl.innerHTML = randomQuote;
       };
 
-      setRandomFact();
+      if (typeof window.updateBatteryStatus === "function") {
+        window.updateBatteryStatus();
+      } else {
+        setRandomFact();
+      }
 
       factEl.addEventListener("click", setRandomFact);
 
     })
     .catch(() => {
-      document.getElementById("fact").innerHTML =
+      factEl.innerHTML =
         "idk what happened something broke";
     });
 
