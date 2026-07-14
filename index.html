@@ -59,6 +59,9 @@ if (!location.hostname.endsWith("github.io")) {
                         }
                     }
                     battery.addEventListener('levelchange', updateBatteryStatus);
+                    if (thing.textContent.includes("your battery percentage is:")) {
+                        updateBatteryStatus();
+                    }
                 });
             }
         </script>
