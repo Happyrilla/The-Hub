@@ -37,7 +37,7 @@ if (!location.hostname.endsWith("github.io")) {
 
             input.addEventListener('change', () => {
                 if (!input.value.startsWith('https://')) {
-                    input.value = 'http://' + input.value;
+                    input.value = 'https://' + input.value;
                 }
                 iframe.src = input.value;
             });
