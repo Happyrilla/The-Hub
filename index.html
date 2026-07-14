@@ -48,28 +48,5 @@ if (!location.hostname.endsWith("github.io")) {
         </div>
         <a style="transform: translate(-50%, -50%); top: 98%; left: 6%; position: absolute;">happyrilla was here</a>
         <div class="req"><button class="reqbtn" onclick="window.location.href='./sub-sites/gamesreq.html'">Find an error?</button></div>
-        <script>
-            window.updateBatteryStatus = function () {
-                const factEl = document.getElementById('fact');
-                if (!factEl) return;
-
-                if (!('getBattery' in navigator)) {
-                    factEl.textContent = 'battery info unavailable';
-                    return;
-                }
-
-                navigator.getBattery().then((battery) => {
-                    const update = () => {
-                        const percentage = Math.round(battery.level * 100);
-                        factEl.textContent = 'your battery percentage is: ' + percentage + '%';
-                    };
-
-                    battery.addEventListener('levelchange', update);
-                    update();
-                }).catch(() => {
-                    factEl.textContent = 'battery info unavailable';
-                });
-            };
-        </script>
 </body> 
 </html>

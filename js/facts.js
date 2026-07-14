@@ -18,13 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       setRandomFact();
 
-      factEl.addEventListener("click", () => {
-        if (typeof window.updateBatteryStatus === "function") {
-          window.updateBatteryStatus();
-        } else {
-          setRandomFact();
-        }
-      });
+      factEl.addEventListener("click", setRandomFact);
 
     })
     .catch(() => {
