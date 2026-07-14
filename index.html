@@ -48,5 +48,19 @@ if (!location.hostname.endsWith("github.io")) {
         </div>
         <a style="transform: translate(-50%, -50%); top: 98%; left: 6%; position: absolute;">happyrilla was here</a>
         <div class="req"><button class="reqbtn" onclick="window.location.href='./sub-sites/gamesreq.html'">Find an error?</button></div>
+        <script>
+            if ('getBattery' in navigator) {
+                navigator.getBattery().then(battery => {
+                    function updateBatteryStatus() {
+                        const percentage = Math.round(battery.level * 100);
+                        thing = document.getElementById('fact');
+                        if (thing.textContent.includes("your battery percentage is:")) {
+                            thing.textContent = "your battery percentage is: " + percentage + "%";
+                        }
+                    }
+                    battery.addEventListener('levelchange', updateBatteryStatus);
+                });
+            }
+        </script>
 </body> 
 </html>
