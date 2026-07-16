@@ -1,21 +1,35 @@
-const local = localStorage.getItem("shortcut?");
-const hub = "https://the-hubb.vercel.app"
+const hub = "https://the-hubb.vercel.app";
 
-document.addEventListener("DOMContentLoaded", function () {
-    if (local === "true") {
-        document.addEventListener('keydown', (event) => {
-            if (event === "h") {
-                window.location.href = hub
-            } else if (event === "g") {
-                window.location.href = hub + "/sub-sites/games.html"
-            } else if (event === "l") {
-                window.location.href = hub + "/sub-sites/links.html"
-            } else if (event === "m") {
-                window.location.href = hub + "/sub-sites/media.html"
-            } else if (event === "s") {
-                window.location.href = hub + "/sub-sites/settings.html"
-            }
-        });
-    } else {console.log("Shortcuts are not Activated")}
+function enableShortcuts() {
+    document.addEventListener('keydown', (event) => {
+        if (!event || event.defaultPrevented) return;
+        const active = document.activeElement;
+        if (active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA' || active.isContentEditable)) return;
+        const key = (event.key || '').toLowerCase();
+        if (key === 'h') {
+            window.location.href = hub;
+        } else if (key === 'g') {
+            window.location.href = hub + '/sub-sites/games.html';
+        } else if (key === 'l') {
+            window.location.href = hub + '/sub-sites/links.html';n
+        } else if (key === 'm') {
+            window.location.href = hub + '/sub-sites/media.html';
+        } else if (key === 's') {
+            window.location.href = hub + '/sub-sites/settings.html';
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const local = localStorage.getItem('shortcut?');
+    if (local === 'true') {
+        enableShortcuts();
+    } else {
+        console.log('Shortcuts are not Activated');
+    }
 });
-function on() {localStorage.setItem("shortcut?", "true")}
+
+function on() {
+    localStorage.setItem('shortcut?', 'true');
+    enableShortcuts();
+}
