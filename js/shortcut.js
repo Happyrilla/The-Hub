@@ -18,3 +18,4 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     } else {console.log("Shortcuts are not Activated")}
 });
+function on() {localStorage.setItem("shortcut?", "true")}
