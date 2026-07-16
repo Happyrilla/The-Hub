@@ -9,7 +9,7 @@
     <link rel="icon" type="image/png" href="https://www.gstatic.com/images/branding/searchlogo/ico/favicon.ico" />
     <script src="https://kit.fontawesome.com/19b444568b.js" crossorigin="anonymous"></script>
     <script src="../js/panic.js" defer></script>
-    <script src="./js/shortcut.js"></script>
+    <script src="../js/shortcut.js"></script>
     <script>
         if (!location.hostname.endsWith("github.io")) {
             var s = document.createElement("script");
@@ -91,6 +91,14 @@
             </form>
         </div>
         <div class="thingy">
+            <h2 style="margin-top: 20px;">Shortcuts</h2>
+            <form onsubmit="return false;" style="display: flex; flex-direction: column;">
+                <button onclick="shortcut('true'); enableShortcuts()">Activate Shortcuts</button>
+                <button onclick="shortcut('false')">Deactivate Shortcuts</button>
+                <button style="margin-top: 30px;" type="button" id="dialogbtn">List of Shortcuts</button>
+            </form>
+        </div>
+        <div class="thingy">
             <h2 style="margin-top: 20px;">Help</h2>
             <form style="display: flex; flex-direction: column;">
                 <a href="./settings/tab.html" class="form">Tab Customizer Help</a>
@@ -109,14 +117,34 @@
             <button id="closebtn" style="left: 32%;">Close</button>
         </form>
     </dialog>
+    <dialog id="dialog2">
+        <form method="dialog">
+            <div class="things">
+                <h2 style="font-size: 2rem; top: 20%;">Shortcut keys:</h2>
+                <br>
+                <a>Home Page: H</a>
+                <a>Games Page: G</a>
+                <a>Links Page: L</a>
+                <a>Media Page: M</a>
+                <a>Settings Page: S</a>
+            </div>
+            <button id="closebtn" style="left: 32%;">Close</button>
+        </form>
+    </dialog>
     <script>
         const btn = document.getElementById("dialogbtn");
         const dialog = document.getElementById("dialog");
+        const dialog2 = document.getElementById("dialog2");
         const closeBtn = document.getElementById("closeBtn");
 
         if (btn && dialog) {
             btn.addEventListener('click', () => {
                 dialog.showModal();
+            });
+        }
+        if (btn && dialog2) {
+            btn.addEventListener('click', () => {
+                dialog2.showModal();
             });
         }
         function clipboard(value) {navigator.clipboard.writeText(value);};
@@ -134,6 +162,12 @@
             localStorage.setItem("title", value);
         }
         function setfavicon(value) { const sm = value; document.querySelector("link[rel='icon']").href = sm; localStorage.setItem("favicon", sm) }
+        function shortcut(value) {
+            if (value === "true") {
+                localStorage.setItem("shortcut?", "true");
+            } else {
+                localStorage.setItem("shortcut?", null);
+        }}
     </script>
 </body>
 
