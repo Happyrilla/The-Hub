@@ -132,22 +132,24 @@
         </form>
     </dialog>
     <script>
-        const btn = document.getElementById("dialogbtn");
-        const dialog = document.getElementById("dialog");
-        const dialog2 = document.getElementById("dialog2");
-        const closeBtn = document.getElementById("closeBtn");
+        const dialogBtns = document.querySelectorAll('#dialogbtn');
+        const dialog = document.getElementById('dialog');
+        const dialog2 = document.getElementById('dialog2');
+        const closeBtns = document.querySelectorAll('#closebtn');
 
-        if (btn && dialog) {
-            btn.addEventListener('click', () => {
-                dialog.showModal();
-            });
+        if (dialogBtns.length) {
+            if (dialogBtns[0] && dialog) dialogBtns[0].addEventListener('click', () => dialog.showModal());
+            if (dialogBtns[1] && dialog2) dialogBtns[1].addEventListener('click', () => dialog2.showModal());
         }
-        if (btn && dialog2) {
-            btn.addEventListener('click', () => {
-                dialog2.showModal();
+
+        closeBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const dlg = e.target.closest('dialog');
+                if (dlg) dlg.close();
             });
-        }
-        function clipboard(value) {navigator.clipboard.writeText(value);};
+        });
+
+        function clipboard(value) { navigator.clipboard.writeText(value); }
     </script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
