@@ -41,5 +41,27 @@ if (!location.hostname.endsWith("github.io")) {
         <a href="./opener.html" class="dashy">Website Opener</a>
         <a href="./chat.html" class="dashy">Chat</a>
     </div>
+    <div style="transform: translate(-50%, -50%); top: 50%; left: 10%; position: absolute; gap: 0.7rem; display: grid; background-color: #5e7594; box-shadow: 0 0 70px 2px rgba(0, 0, 0, 0.3); padding: 10px; border-radius: 10px; text-align: center;">
+        <span><a>Tab Customizer: </a><a id="custom"></a></span>
+        <br>
+        <span><a>Battery Percentage: </a><a id="battery"></a></span>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const bate = document.getElementById("battery")
+            const custom = document.getElementById("custom")
+            const favi = localStorage.getItem("favicon")
+            const title = localStorage.getItem("title")
+
+            if ("getBattery" in navigator) {
+                navigator.getBattery()
+                    .then((battery) => {
+                        const percentage = Math.round(battery.level * 100);
+                        bate.textContent = percentage + "%"
+                    })
+            }
+            custom.innerHTML = title + "<img src='" + favi + "' height='20px' width='20px'>"
+        })
+    </script>
 </body>
 </html>
