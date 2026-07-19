@@ -16,6 +16,8 @@ function enableShortcuts() {
             window.location.href = hub + '/sub-sites/media.html';
         } else if (key === 's') {
             window.location.href = hub + '/sub-sites/settings.html';
+        } else if (key === 'd') {
+            window.location.href = hub + '/sub-sites/dashboard.html';
         }
     });
 }
