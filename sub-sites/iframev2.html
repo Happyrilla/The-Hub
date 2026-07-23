@@ -39,7 +39,6 @@
         ifr.addEventListener('load', () => {
             if (ifr.src) { idd.placeholder = ifr.src }
         })
-        if (!ifr.src) { dia.showModal() }
         if (app) {
             ifr.src = app;
         }
