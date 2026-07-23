@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Apps</title>
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="icon" type="image/png" href="https://www.gstatic.com/images/branding/searchlogo/ico/favicon.ico" />
+    <script src="https://kit.fontawesome.com/19b444568b.js" crossorigin="anonymous"></script>
+    <script src="../js/customizer.js"></script>
+    <script src="../js/shortcut.js"></script>
+    <script src="../js/tilt.js"></script>
+    <script>
+        if (!location.hostname.endsWith("github.io")) {
+            var s = document.createElement("script");
+            s.defer = true;
+            s.src = "../_vercel/insights/script.js";
+            document.head.appendChild(s);
+        }
+    </script>
+</head>
+<body>
+    <div id="sub">
+        <a href="../" style="margin-left: 10px;"> <i class="fa-regular fa-face-smile"></i> The Hub</a>
+        <a href="../sub-sites/games.html"><span><i class="fa-solid fa-gamepad" style="font-size: 30px;"></i>Games</span></a>
+        <a href="../sub-sites/links.html"><i class="fa-solid fa-link"></i> Links</a>
+        <a href="../sub-sites/media.html"><i class="fa-solid fa-tv"></i> Media</a>
+        <a href="../sub-sites/settings.html"> <i class="fa-solid fa-gear"></i> Settings</a>
+    </div>
+    <div class="games">
+        <img class="gamesy" src="../assets/apps/ruffle.png" onclick="window.location.href='./iframev2.html?app=./apps/ruffle.html'" data-tilt>
+    </div>
+</body>
+</html>

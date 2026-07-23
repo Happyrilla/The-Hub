@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ruffle SWF Uploader</title>
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="icon" type="image/png" href="https://www.gstatic.com/images/branding/searchlogo/ico/favicon.ico" />
+    <script src="https://kit.fontawesome.com/19b444568b.js" crossorigin="anonymous"></script>
+    <script src="../js/customizer.js"></script>
+    <script src="../js/shortcut.js"></script>
+    <script src="../../games%20and%20ruffle/ruffle/ruffle.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #5e7594;
+            color: #f3f4f6;
+        }
+
+        .page {
+            min-height: 100vh;
+            padding: 2rem 1rem 3rem;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .card {
+            max-width: 1000px;
+            margin: 0 auto;
+            width: 100%;
+            background: #1f2937;
+            border: 1px solid #374151;
+            border-radius: 16px;
+            padding: 1.25rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .drop-zone {
+            border: 2px dashed #6b7280;
+            border-radius: 14px;
+            min-height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 1rem;
+            cursor: pointer;
+            transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .drop-zone.drag-active {
+            border-color: #60a5fa;
+            transform: scale(1.01);
+            background: rgba(96, 165, 250, 0.12);
+        }
+
+        .drop-zone strong {
+            color: #93c5fd;
+        }
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 1rem;
+        }
+
+        .controls input[type="file"] {
+            color: #f3f4f6;
+        }
+
+        .status {
+            font-size: 0.95rem;
+            color: #d1d5db;
+        }
+
+        #playerContainer {
+            min-height: 420px;
+            border-radius: 14px;
+            overflow: hidden;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #374151;
+        }
+
+        #playerContainer .placeholder {
+            color: #9ca3af;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        @media (max-width: 700px) {
+            .page {
+                padding: 1rem 0.75rem 2rem;
+            }
+
+            .card {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="page">
+        <section class="card">
+            <h1>Ruffle SWF Uploader</h1>
+            <p>Drop an SWF file here or choose one from your device to play it in the browser.</p>
+
+            <div id="dropZone" class="drop-zone">
+                <div>
+                    <p><strong>Drop your .swf file here</strong></p>
+                    <p>or click to browse your files</p>
+                </div>
+            </div>
+
+            <div class="controls">
+                <label for="swfInput">
+                    <input id="swfInput" type="file" accept=".swf,application/x-shockwave-flash" />
+                </label>
+                <div id="status" class="status">No file loaded yet.</div>
+            </div>
+        </section>
+
+        <section class="card">
+            <div id="playerContainer">
+                <div class="placeholder">Your uploaded SWF will appear here.</div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const dropZone = document.getElementById("dropZone");
+        const swfInput = document.getElementById("swfInput");
+        const status = document.getElementById("status");
+        const playerContainer = document.getElementById("playerContainer");
+        let currentObjectUrl = null;
+
+        function setStatus(message) {
+            status.textContent = message;
+        }
+
+        function isSwfFile(file) {
+            return file && (file.name.toLowerCase().endsWith(".swf") || file.type.includes("flash"));
+        }
+
+        function cleanupCurrentUrl() {
+            if (currentObjectUrl) {
+                URL.revokeObjectURL(currentObjectUrl);
+                currentObjectUrl = null;
+            }
+        }
+
+        function loadSwfFile(file) {
+            if (!isSwfFile(file)) {
+                setStatus("Please choose a .swf file.");
+                return;
+            }
+
+            cleanupCurrentUrl();
+            playerContainer.innerHTML = '<div class="placeholder">Loading...</div>';
+            setStatus(`Loading ${file.name}...`);
+
+            currentObjectUrl = URL.createObjectURL(file);
+
+            const ruffle = window.RufflePlayer.newest();
+            const player = ruffle.createPlayer({
+                width: "100%",
+                height: "100%",
+                autoplay: "auto",
+                backgroundColor: "#000000"
+            });
+
+            playerContainer.innerHTML = "";
+            playerContainer.appendChild(player);
+
+            player.load(currentObjectUrl).catch(() => {
+                setStatus("The file could not be loaded. Try another SWF.");
+            });
+        }
+
+        ["dragenter", "dragover"].forEach((eventName) => {
+            dropZone.addEventListener(eventName, (event) => {
+                event.preventDefault();
+                dropZone.classList.add("drag-active");
+            });
+        });
+
+        ["dragleave", "dragend", "drop"].forEach((eventName) => {
+            dropZone.addEventListener(eventName, () => {
+                dropZone.classList.remove("drag-active");
+            });
+        });
+
+        dropZone.addEventListener("drop", (event) => {
+            event.preventDefault();
+            const file = event.dataTransfer?.files?.[0];
+            if (file) {
+                loadSwfFile(file);
+            }
+        });
+
+        dropZone.addEventListener("click", () => swfInput.click());
+        swfInput.addEventListener("change", (event) => {
+            const file = event.target.files?.[0];
+            if (file) {
+                loadSwfFile(file);
+            }
+        });
+    </script>
+</body>
+</html>
