@@ -347,6 +347,32 @@ linksy:hover {
     transform: scale(1.2);
 }
 
+.iframec {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 70vh;
+    margin-top: 5vh;
+}
+
+.iframec iframe {width: 70rem; height: 100%;}
+
+.underbar {
+    display: inherit;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    background-color: black;
+    width: 70rem;
+    height: 5rem;
+}
+
+.underbar a {
+    background-color: #131313;
+    padding: 0.7rem;
+}
+
 body a {
     outline: none;
     text-decoration: none;

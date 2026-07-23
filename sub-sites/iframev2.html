@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Iframer</title>
+    <script src="../js/customizer.js"></script>
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="icon" type="image/png" href="https://www.gstatic.com/images/branding/searchlogo/ico/favicon.ico" />
+    <script src="https://kit.fontawesome.com/19b444568b.js" crossorigin="anonymous"></script>
+    <script src="../js/shortcut.js"></script>
+</head>
+<body>
+    <div id="sub">
+        <a href="../" style="margin-left: 10px;"> <i class="fa-regular fa-face-smile"></i> The Hub</a>
+        <a href="../sub-sites/games.html"><span><i class="fa-solid fa-gamepad" style="font-size: 30px;"></i>Games</span></a>
+        <a href="../sub-sites/links.html"><i class="fa-solid fa-link"></i> Links</a>
+        <a href="../sub-sites/media.html"><i class="fa-solid fa-tv"></i> Media</a>
+        <a href="../sub-sites/settings.html"> <i class="fa-solid fa-gear"></i> Settings</a>
+    </div>
+    <div class="iframec">
+        <iframe id="iframee"></iframe>
+        <div class="underbar">
+            <a onclick="" class="fa-solid fa-expand"></a>
+            <a onclick="refresh()" class="fa-solid fa-rotate"></a>
+            <a onclick="dialogy()" class="fa-solid fa-keyboard" style="margin-right: 58rem;"></a>
+        </div>
+    </div>
+    <dialog id="dialog">
+        <h1>Enter a custom link</h1>
+        <input type="text" id="customlink" placeholder="https://example.com" oninput="updateLink()" />
+        <button id="dialogbtn" onclick="dia.close()" style="margin-top: 20rem; margin-left: 20rem;">Close</button>
+    </dialog>
+    <script defer>
+        const dia = document.getElementById("dialog");
+        const params = new URLSearchParams(window.location.search);
+        const app = params.get('app');
+        const ifr = document.getElementById("iframee")
+        const idd = document.querySelector("#customlink")
+        ifr.addEventListener('load', () => {
+            if (ifr.src) { idd.placeholder = ifr.src }
+        })
+        if (!ifr.src) { dia.showModal() }
+        if (app) {
+            ifr.src = app;
+        }
+        function refresh() {
+            ifr.src = ifr.src;
+        }
+        document.querySelector('.fa-expand').addEventListener('click', async () => {
+            if (document.fullscreenElement) {
+                await document.exitFullscreen();
+            } else {
+                await ifr.requestFullscreen();
+            }
+        });
+        function dialogy() {
+            dia.showModal();
+        }
+        function updateLink() {
+            const link = document.getElementById("customlink").value;
+            if (link.startsWith("https://")  || link.startsWith(".")) {
+                ifr.src = link;
+            } else {
+                ifr.src = "https://" + link
+            }
+        }
+    </script>
+</body>
+</html>
