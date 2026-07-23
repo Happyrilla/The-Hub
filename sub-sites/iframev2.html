@@ -20,9 +20,9 @@
     <div class="iframec">
         <iframe id="iframee"></iframe>
         <div class="underbar">
-            <a onclick="" class="fa-solid fa-expand"></a>
-            <a onclick="refresh()" class="fa-solid fa-rotate"></a>
-            <a onclick="dialogy()" class="fa-solid fa-keyboard" style="margin-right: 58rem;"></a>
+            <a id="expand" class="underbar-btn" onclick="" data-content="Fullscreen"><i class="fa-solid fa-expand"></i></a>
+            <a class="underbar-btn" onclick="refresh()" data-content="Refresh"><i class="fa-solid fa-rotate"></i></a>
+            <a class="underbar-btn" onclick="dialogy()" style="margin-right: 58rem;" data-content="Custom Link"><i class="fa-solid fa-keyboard"></i></a>
         </div>
     </div>
     <dialog id="dialog">
@@ -45,13 +45,29 @@
         function refresh() {
             ifr.src = ifr.src;
         }
-        document.querySelector('.fa-expand').addEventListener('click', async () => {
+        document.querySelector('#expand').addEventListener('click', async () => {
             if (document.fullscreenElement) {
                 await document.exitFullscreen();
             } else {
                 await ifr.requestFullscreen();
             }
         });
+
+        document.querySelectorAll('.underbar-btn').forEach((btn) => {
+            const originalHtml = btn.innerHTML;
+            const label = btn.getAttribute('data-content');
+
+            btn.addEventListener('mouseenter', () => {
+                btn.innerHTML = label
+                btn.style.fontSize = "0.6rem"
+            });
+
+            btn.addEventListener('mouseleave', () => {
+                btn.innerHTML = originalHtml;
+                btn.style.fontSize = "1rem"
+            });
+        });
+
         function dialogy() {
             dia.showModal();
         }
