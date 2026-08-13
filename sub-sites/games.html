@@ -28,6 +28,22 @@ if (!location.hostname.endsWith("github.io")) {
   document.head.appendChild(s);
 }
 </script>
+    <script>
+        fetch("../sub-sites/games.html")
+            .then((response) => response.text())
+            .then((html) => {
+                const doc = new DOMParser().parseFromString(html, "text/html");
+                const gameCount = doc.querySelectorAll("img.gamesy").length;
+
+                document.getElementById("search").innerText = "Search our (" + gameCount + " games)";
+
+                const el = document.getElementById("gameCount");
+                if (el) el.textContent = gameCount;
+            })
+            .catch((err) => {
+                console.error("Could not load games page:", err);
+            });
+    </script>
     </head>
     <body>
         <div id="sub">
