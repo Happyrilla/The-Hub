@@ -12,8 +12,11 @@ document.addEventListener("DOMContentLoaded", function () {
     .then((data) => {
 
       const batteryFactText = "your battery percentage is:";
+      const gameFactText = "Did you know we have";
       const isBatteryFact = (quote) =>
         typeof quote === "string" && quote.trim().toLowerCase() === batteryFactText.toLowerCase();
+      const isGameFact = (quote) =>
+        typeof quote === "string" && quote.trim().toLowerCase() === gameFactText.toLowerCase();
 
       const setRandomFact = () => {
         const randomQuote = data[Math.floor(Math.random() * data.length)];
@@ -32,7 +35,25 @@ document.addEventListener("DOMContentLoaded", function () {
             factEl.textContent = batteryFactText + " unavailable";
           }
         } else {
+          if (isGameFact(randomQuote)) {
+            fetch("../sub-sites/games.html")
+              .then((response) => response.text())
+              .then((html) => {
+                const doc = new DOMParser().parseFromString(html, "text/html");
+                const gameCount = doc.querySelectorAll("img.gamesy").length;
+
+                factEl.textContent = gameFactText + " " + gameCount + " games";
+
+                // example: show it somewhere else
+                const el = document.getElementById("gameCount");
+                if (el) el.textContent = gameCount;
+              })
+              .catch((err) => {
+                console.error("Could not load games page:", err);
+              });
+          } else {
           factEl.innerHTML = randomQuote;
+          }
         }
       };
 
