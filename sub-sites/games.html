@@ -28,7 +28,7 @@ if (!location.hostname.endsWith("github.io")) {
   document.head.appendChild(s);
 }
 </script>
-    <script>
+    <script defer>
         fetch("../sub-sites/games.html")
             .then((response) => response.text())
             .then((html) => {
