@@ -30,7 +30,8 @@ if (!location.hostname.endsWith("github.io")) {
         <div class="underbar">
             <a id="expand" class="underbar-btn" onclick="" data-content="Fullscreen"><i class="fa-solid fa-expand"></i></a>
             <a class="underbar-btn" onclick="refresh()" data-content="Refresh"><i class="fa-solid fa-rotate"></i></a>
-            <a class="underbar-btn" onclick="dialogy()" style="margin-right: 58rem;" data-content="Custom Link"><i class="fa-solid fa-keyboard"></i></a>
+            <a class="underbar-btn" onclick="dialogy()" data-content="Custom Link"><i class="fa-solid fa-keyboard"></i></a>
+            <a class="underbar-btn" onclick="prox()" style="margin-right: 58rem;" data-content="Proxy"><img src="../assets/interstellar.png"></a>
         </div>
     </div>
     <dialog id="dialog">
@@ -44,6 +45,21 @@ if (!location.hostname.endsWith("github.io")) {
         const app = params.get('app');
         const ifr = document.getElementById("iframee")
         const idd = document.querySelector("#customlink")
+        let isprox = "no"
+        function isproxy() {
+            if (isprox === "yes") {
+                return true
+            } else {
+                return false
+            }
+        }
+        function prox() {
+            if (isprox === "no") {
+                isprox = "yes"
+            } else {
+                isprox = "no"
+            }
+        }
         ifr.addEventListener('load', () => {
             if (ifr.src) { idd.placeholder = ifr.src }
         })
@@ -82,9 +98,17 @@ if (!location.hostname.endsWith("github.io")) {
         function updateLink() {
             const link = document.getElementById("customlink").value;
             if (link.startsWith("https://")  || link.startsWith(".")) {
-                ifr.src = link;
+                if (!isproxy()) {
+                    ifr.src = link;
+                } else {
+                    ifr.src = "https://interstellary.vercel.app/a/sj/" + link
+                }
             } else {
-                ifr.src = "https://" + link
+                if (!isproxy()) {
+                    ifr.src = "https://" + link
+                } else {
+                    ifr.src = "https://interstellary.vercel.app/a/sj/" + "https://" + link
+                }
             }
         }
     </script>
