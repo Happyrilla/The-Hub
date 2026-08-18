@@ -96,19 +96,17 @@ if (!location.hostname.endsWith("github.io")) {
             dia.showModal();
         }
         function updateLink() {
-            const link = document.getElementById("customlink").value;
-            if (link.startsWith("https://")  || link.startsWith(".")) {
-                if (!isproxy()) {
-                    ifr.src = link;
-                } else {
-                    ifr.src = "https://interstellary.vercel.app/a/sj/" + link
-                }
+            let link = document.getElementById("customlink").value;
+            
+            // Ensure link has protocol
+            if (!link.startsWith("https://") && !link.startsWith("http://") && !link.startsWith(".")) {
+                link = "https://" + link;
+            }
+            
+            if (!isproxy()) {
+                ifr.src = link;
             } else {
-                if (!isproxy()) {
-                    ifr.src = "https://" + encodeURIComponent(link);
-                } else {
-                    ifr.src = "https://interstellary.vercel.app/a/sj/" + "https://" + encodeURIComponent(link);
-                }
+                ifr.src = "https://interstellary.vercel.app/a/sj/" + encodeURIComponent(link);
             }
         }
     </script>
