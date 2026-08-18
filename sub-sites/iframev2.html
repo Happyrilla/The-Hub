@@ -105,9 +105,9 @@ if (!location.hostname.endsWith("github.io")) {
                 }
             } else {
                 if (!isproxy()) {
-                    ifr.src = "https://" + link
+                    ifr.src = "https://" + encodeURIComponent(link);
                 } else {
-                    ifr.src = "https://interstellary.vercel.app/a/sj/" + "https://" + link
+                    ifr.src = "https://interstellary.vercel.app/a/sj/" + "https://" + encodeURIComponent(link);
                 }
             }
         }
