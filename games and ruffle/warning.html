@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Warning</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 90vh;
+        }
+        body h1 {
+            font-size: 4rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>Warning!</h1>
+    <h2 id="1">This is a simple warning page.</h2>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const app = params.get("app");
+        const size = window.location.hash.replace("#", "")
+        const link = params.get("link");
+        const instp = document.getElementById("1");
+        
+        instp.innerHTML = `<a href="./${link}/${link}.html">${app}</a>` + ' is a big file. <br>it may take a while to download the ' + size + '. <br>if you dont want to download this, press <a href="../sub-sites/games.html">Here</a>';
+    </script>
+</body>
+</html>
