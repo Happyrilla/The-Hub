@@ -92,12 +92,40 @@ if (!location.hostname.endsWith("github.io")) {
             return encodeURIComponent(String(url));
         }
 
+        let proxyReady = false;
+        let proxyBootstrapping = false;
+        const proxyOrigin = "https://interste-five.vercel.app/";
+
         function getPxyUrlForSj(url) {
             const encoded = encodeUrlForSj(url);
-            return `https://interste-five.vercel.app/a/sj/${encoded}`;
+            return `${proxyOrigin}a/sj/${encoded}`;
         }
+
         function prox() {
-            ifr.src = getPxyUrlForSj(ifr.src);
+            const target = ifr.src;
+            if (!target || target === window.location.href) return;
+
+            const proxyUrl = getPxyUrlForSj(target);
+            if (proxyReady) {
+                ifr.src = proxyUrl;
+                return;
+            }
+
+            if (proxyBootstrapping) return;
+            proxyBootstrapping = true;
+
+            const bootstrap = document.createElement("iframe");
+            bootstrap.hidden = true;
+            bootstrap.src = proxyOrigin;
+            bootstrap.onload = () => {
+                setTimeout(() => {
+                    proxyReady = true;
+                    proxyBootstrapping = false;
+                    bootstrap.remove();
+                    ifr.src = proxyUrl;
+                }, 1500);
+            };
+            document.body.appendChild(bootstrap);
         }
     </script>
 </body>
