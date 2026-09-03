@@ -102,8 +102,8 @@ if (!location.hostname.endsWith("github.io")) {
                 const encoded = encodeUrlForSj(url);
                 return `https://interstellaryy.vercel.app/a/sj/${encoded}`;
             }
-            function prox(value) {
-                value.src = getPxyUrlForSj(ifr.src);
+            function prox() {
+                ifr.src = getPxyUrlForSj(ifr.src);
             }
     </script>
 </body>
