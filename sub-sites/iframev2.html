@@ -89,22 +89,16 @@ if (!location.hostname.endsWith("github.io")) {
             ifr.src = link;
         }
         function encodeUrlForSj(url) {
-            const s = String(url);
+            return encodeURIComponent(String(url));
+        }
 
-             try {
-                const b64 = btoa(unescape(encodeURIComponent(s)));
-                return b64.replace(/=/g, "").replace(/\+/g, "-").replace(/\//g, "_");
-                } catch (e) {
-                    return encodeURIComponent(s);
-                }
-            }
-            function getPxyUrlForSj(url) {
-                const encoded = encodeUrlForSj(url);
-                return `https://interstellaryy.vercel.app/a/sj/${encoded}`;
-            }
-            function prox() {
-                ifr.src = getPxyUrlForSj(ifr.src);
-            }
+        function getPxyUrlForSj(url) {
+            const encoded = encodeUrlForSj(url);
+            return `https://interstellaryy.vercel.app/a/sj/${encoded}`;
+        }
+        function prox() {
+            ifr.src = getPxyUrlForSj(ifr.src);
+        }
     </script>
 </body>
 </html>
