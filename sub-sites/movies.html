@@ -4,6 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Movies Search</title>
+    <script src="../js/customizer.js"></script>
+    <script src="../js/links.js"></script>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/png" href="https://www.gstatic.com/images/branding/searchlogo/ico/favicon.ico"/>
+    <script src="https://kit.fontawesome.com/19b444568b.js" crossorigin="anonymous"></script>
+    <script src="../js/shortcut.js"></script>
+    <script src="../js/media.js"></script>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
@@ -40,7 +47,6 @@
 
       body {
         min-height: 100vh;
-        padding: 32px 18px 56px;
       }
 
       a {
@@ -241,11 +247,13 @@
     </style>
   </head>
   <body>
-    <div class="page">
-      <div class="topbar">
-        <h1>Movie Finder</h1>
+      <div id="sub" style="margin-top: 10px; margin-bottom: 60px;">
+        <a href="../" style="margin-left: 10px;"> <i class="fa-regular fa-face-smile"></i> The Hub</a>
+        <a href="../sub-sites/games.html"><span><i class="fa-solid fa-gamepad" style="font-size: 30px;"></i> Games</span></a>
+        <a href="../sub-sites/links.html"><i class="fa-solid fa-link"></i> Links</a>
+        <a href="../sub-sites/media.html"><i class="fa-solid fa-tv"></i> Media</a>
+        <a href="../sub-sites/settings.html"> <i class="fa-solid fa-gear"></i> Settings</a>
       </div>
-
       <div class="controls">
         <div class="field">
           <label for="movieSearch">Search for a movie</label>
@@ -379,7 +387,7 @@
             const response = await fetch(endpoint);
 
             if (!response.ok) {
-              lastError = new Error(`TMDB request failed (${response.status}).`);
+              lastError = new Error(`Error Fetching Movies: (${response.status}).`);
               continue;
             }
 
@@ -390,7 +398,7 @@
           }
         }
 
-        throw lastError || new Error("TMDB request failed.");
+        throw lastError || new Error("Error Fetching Movies: (Failed to fetch movies).");
       }
 
       async function handleSearch() {
@@ -408,7 +416,7 @@
             : "Showing popular TMDB movies.");
         } catch (error) {
           movieGrid.innerHTML = '<div class="empty">Unable to load TMDB results right now.</div>';
-          setStatus(`TMDB request failed. ${error.message}`, true);
+          setStatus(`Error Fetching Movies: ${error.message}`, true);
         }
       }
 
@@ -420,7 +428,7 @@
         }
       });
 
-      setStatus("Loading popular TMDB movies…");
+      setStatus("Loading popular movies…");
       handleSearch();
     </script>
   </body>
