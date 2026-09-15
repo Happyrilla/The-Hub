@@ -1,10 +1,425 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-</head>
-<body>
-    <iframe src="https://somethingsimethung-github-ku89ozr01-happyrilla-s-projects.vercel.app/movies.html" frameborder="0"></iframe>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movies Search</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+      @font-face {
+        font-family: "Cat Song";
+        src: url("./assets/Cat Song.otf") format("opentype");
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      :root {
+        --bg: #5e7594;
+        --bg-2: #7a8fab;
+        --panel: rgba(126, 146, 174, 0.9);
+        --panel-strong: rgba(122, 143, 171, 1);
+        --accent: #c66767;
+        --accent-2: #0092ac;
+        --text: #ffffff;
+        --muted: #eaf3ff;
+        --shadow: rgba(0, 0, 0, 0.35);
+        --border: rgba(255, 255, 255, 0.22);
+      }
+
+      * { box-sizing: border-box; }
+
+      html, body {
+        margin: 0;
+        min-height: 100%;
+        font-family: "Cat Song", "Roboto", serif;
+        background-color: var(--bg);
+        color: var(--text);
+      }
+
+      body {
+        min-height: 100vh;
+        padding: 32px 18px 56px;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .page {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding-top: 86px;
+      }
+
+      .topbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 6rem;
+        background: #5e7594;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        z-index: 1000;
+        box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.5);
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-family: "Cat Song";
+        letter-spacing: 0.04em;
+      }
+
+      .controls {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 1rem;
+        box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.35);
+        padding: 20px;
+        display: grid;
+        grid-template-columns: minmax(220px, 1.4fr) minmax(220px, 1fr) auto;
+        gap: 16px;
+        margin-bottom: 18px;
+      }
+
+      .field {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      label {
+        font-size: 0.85rem;
+        color: var(--muted);
+        font-family: "Roboto", serif;
+      }
+
+      input {
+        border: 1px solid var(--border);
+        border-radius: 15px;
+        background-color: #5e7594;
+        color: var(--text);
+        padding: 14px 16px;
+        font-size: 1rem;
+        outline: none;
+        opacity: 0.85;
+        font-family: "Roboto", serif;
+      }
+
+      input::placeholder {
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      input:focus {
+        opacity: 1;
+        border-color: rgba(255, 255, 255, 0.7);
+        box-shadow: 0 0 0 3px rgba(0, 146, 172, 0.15);
+      }
+
+      button {
+        border: 0;
+        border-radius: 0.375rem;
+        background-color: var(--accent);
+        color: white;
+        padding: 14px 18px;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: transform 0.15s ease, opacity 0.15s ease;
+        font-family: "Roboto", serif;
+      }
+
+      button:hover {
+        transform: scale(1.03);
+        opacity: 0.96;
+      }
+
+      .status {
+        min-height: 24px;
+        margin: 0 4px 18px;
+        color: var(--muted);
+        font-size: 0.95rem;
+        font-family: "Roboto", serif;
+      }
+
+      .movie-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 22px;
+      }
+
+      .movie-card {
+        background: var(--panel-strong);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.35);
+        cursor: pointer;
+        transition: transform 0.18s ease, filter 0.18s ease;
+      }
+
+      .movie-card:hover {
+        transform: translateY(-4px);
+        filter: brightness(1.06);
+      }
+
+      .poster-wrap {
+        aspect-ratio: 2 / 3;
+        overflow: hidden;
+        background: #556d8a;
+      }
+
+      .poster-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .movie-body {
+        padding: 16px;
+      }
+
+      .movie-title {
+        font-size: 1.15rem;
+        font-weight: 700;
+        margin: 0 0 8px;
+        font-family: "Cat Song";
+        letter-spacing: 0.02em;
+      }
+
+      .movie-meta {
+        color: var(--muted);
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+        font-family: "Roboto", serif;
+      }
+
+      .movie-overview {
+        color: white;
+        font-size: 0.95rem;
+        line-height: 1.45;
+        margin: 0;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        line-clamp: 4;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        font-family: "Roboto", serif;
+      }
+
+      .empty {
+        grid-column: 1 / -1;
+        text-align: center;
+        padding: 40px 16px;
+        color: var(--muted);
+        background: rgba(126, 146, 174, 0.8);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.25);
+      }
+
+      @media (max-width: 760px) {
+        .controls {
+          grid-template-columns: 1fr;
+        }
+
+        body {
+          padding-left: 12px;
+          padding-right: 12px;
+        }
+
+        .page {
+          padding-top: 76px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="topbar">
+        <h1>Movie Finder</h1>
+      </div>
+
+      <div class="controls">
+        <div class="field">
+          <label for="movieSearch">Search for a movie</label>
+          <input id="movieSearch" type="text" placeholder="Search by title..." />
+        </div>
+
+        <button id="searchBtn" type="button">Search</button>
+      </div>
+
+      <div id="status" class="status"></div>
+      <div id="movieGrid" class="movie-grid"></div>
+    </div>
+
+    <script>
+      const movieSearch = document.getElementById("movieSearch");
+      const searchBtn = document.getElementById("searchBtn");
+      const movieGrid = document.getElementById("movieGrid");
+      const statusEl = document.getElementById("status");
+
+      const fallbackMovies = [
+        {
+          title: "huh",
+          year: "2022",
+          overview: "hehe",
+          poster: "https://image.tmdb.org/t/p/w500/74xTEw8w2JYJr4P1JxWyCuxk0IT.jpg"
+        }
+      ];
+
+      function normalizeMovie(movie) {
+        return {
+          title: movie.title || movie.name || "Untitled",
+          year: (movie.release_date || movie.first_air_date || "").slice(0, 4) || "Unknown",
+          overview: movie.overview || "No description available.",
+          poster: movie.poster_path
+            ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+            : "https://placehold.co/500x750/111827/ffffff?text=No+Poster",
+          cinemaId: movie.id || null
+        };
+      }
+
+      function setStatus(message, isError = false) {
+        statusEl.textContent = message;
+        statusEl.style.color = isError ? "#fca5a5" : "#a1a1aa";
+      }
+
+      function renderMovies(movies) {
+        movieGrid.innerHTML = "";
+
+        if (!movies.length) {
+          movieGrid.innerHTML = '<div class="empty">No movies matched your search.</div>';
+          return;
+        }
+
+        movies.forEach((movie) => {
+          const card = document.createElement("article");
+          card.className = "movie-card";
+          card.setAttribute("role", "button");
+          card.tabIndex = 0;
+
+          const poster = document.createElement("div");
+          poster.className = "poster-wrap";
+          poster.innerHTML = `<img src="${movie.poster}" alt="${movie.title} poster" loading="lazy"/>`;
+
+          const body = document.createElement("div");
+          body.className = "movie-body";
+          body.innerHTML = `
+            <h2 class="movie-title">${movie.title}</h2>
+            <div class="movie-meta">${movie.year}</div>
+            <p class="movie-overview">${movie.overview}</p>
+          `;
+
+          card.appendChild(poster);
+          card.appendChild(body);
+
+          card.addEventListener("click", () => {
+            const query = encodeURIComponent(movie.title);
+            const cinemaUrl = movie.cinemaId
+              ? `https://cinemaos.live/watch/movie/${movie.cinemaId}`
+              : `https://cinemaos.live/search?q=${query}`;
+
+            window.location.href = cinemaUrl;
+          });
+
+          card.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              card.click();
+            }
+          });
+
+          movieGrid.appendChild(card);
+        });
+      }
+
+      function searchLocalMovies(query) {
+        const normalizedQuery = query.trim().toLowerCase();
+
+        if (!normalizedQuery) {
+          return fallbackMovies;
+        }
+
+        return fallbackMovies.filter((movie) => {
+          const haystack = `${movie.title} ${movie.overview}`.toLowerCase();
+          return haystack.includes(normalizedQuery);
+        });
+      }
+
+      async function fetchMovies(query) {
+        const endpoints = [];
+
+        if (window.location.port === "3000") {
+          endpoints.push(query
+            ? `/api/movies?query=${encodeURIComponent(query)}`
+            : "/api/movies");
+        } else {
+          endpoints.push(query
+            ? `http://127.0.0.1:3000/api/movies?query=${encodeURIComponent(query)}`
+            : "http://127.0.0.1:3000/api/movies");
+          endpoints.push(query
+            ? `/api/movies?query=${encodeURIComponent(query)}`
+            : "/api/movies");
+        }
+
+        let lastError = null;
+
+        for (const endpoint of endpoints) {
+          try {
+            const response = await fetch(endpoint);
+
+            if (!response.ok) {
+              lastError = new Error(`TMDB request failed (${response.status}).`);
+              continue;
+            }
+
+            const results = await response.json();
+            return (results || []).map(normalizeMovie);
+          } catch (error) {
+            lastError = error;
+          }
+        }
+
+        throw lastError || new Error("TMDB request failed.");
+      }
+
+      async function handleSearch() {
+        const query = movieSearch.value.trim();
+
+        try {
+          setStatus(query
+            ? `Loading TMDB results for “${query}”…`
+            : "Loading popular TMDB movies…");
+
+          const tmdbResults = await fetchMovies(query);
+          renderMovies(tmdbResults);
+          setStatus(query
+            ? `Showing TMDB results for “${query}”.`
+            : "Showing popular TMDB movies.");
+        } catch (error) {
+          movieGrid.innerHTML = '<div class="empty">Unable to load TMDB results right now.</div>';
+          setStatus(`TMDB request failed. ${error.message}`, true);
+        }
+      }
+
+      searchBtn.addEventListener("click", handleSearch);
+
+      movieSearch.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          handleSearch();
+        }
+      });
+
+      setStatus("Loading popular TMDB movies…");
+      handleSearch();
+    </script>
+  </body>
 </html>
