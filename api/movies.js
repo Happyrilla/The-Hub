@@ -1,3 +1,5 @@
+import fetch from 'node-fetch';
+
 const fallbackMovies = [
   {
     id: 603,
@@ -35,7 +37,15 @@ function getFallbackMovies(query = '') {
   });
 }
 
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  if (req.method === 'OPTIONS') {
+    return res.status(204).end();
+  }
+
   const TMDB_API_KEY = process.env.TMDB_API_KEY || process.env.TMDB_KEY;
   const query = String(req.query?.query ?? req.query?.q ?? '').trim();
 
@@ -64,4 +74,4 @@ module.exports = async (req, res) => {
     console.error('Failed to fetch TMDB movies:', error);
     return res.json(getFallbackMovies(query));
   }
-};
+}
