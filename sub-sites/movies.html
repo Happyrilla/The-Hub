@@ -156,14 +156,14 @@
 
       .movie-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 22px;
+        grid-template-columns: repeat(7, minmax(110px, 1fr));
+        gap: 14px;
       }
 
       .movie-card {
         background: var(--panel-strong);
         border: 1px solid var(--border);
-        border-radius: 20px;
+        border-radius: 16px;
         overflow: hidden;
         box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.35);
         cursor: pointer;
@@ -182,40 +182,29 @@
       }
 
       .poster-wrap img {
-        width: 50px;
+        width: 100%;
         height: 100%;
         object-fit: cover;
         display: block;
       }
 
       .movie-body {
-        padding: 16px;
+        padding: 10px 8px 12px;
       }
 
       .movie-title {
-        font-size: 1.15rem;
+        font-size: 0.95rem;
         font-weight: 700;
-        margin: 0 0 8px;
+        margin: 0;
         font-family: "Cat Song";
         letter-spacing: 0.02em;
+        line-height: 1.2;
       }
 
       .movie-meta {
         color: var(--muted);
-        font-size: 0.9rem;
-        margin-bottom: 10px;
-        font-family: "Roboto", serif;
-      }
-
-      .movie-overview {
-        color: white;
-        font-size: 0.95rem;
-        line-height: 1.45;
-        margin: 0;
-        display: -webkit-box;
-        -webkit-line-clamp: 4;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
+        font-size: 0.72rem;
+        margin-top: 4px;
         font-family: "Roboto", serif;
       }
 
@@ -230,9 +219,19 @@
         box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.25);
       }
 
+      @media (max-width: 1100px) {
+        .movie-grid {
+          grid-template-columns: repeat(5, minmax(110px, 1fr));
+        }
+      }
+
       @media (max-width: 760px) {
         .controls {
           grid-template-columns: 1fr;
+        }
+
+        .movie-grid {
+          grid-template-columns: repeat(3, minmax(110px, 1fr));
         }
 
         body {
@@ -322,7 +321,6 @@
           body.innerHTML = `
             <h2 class="movie-title">${movie.title}</h2>
             <div class="movie-meta">${movie.year}</div>
-            <p class="movie-overview">${movie.overview}</p>
           `;
 
           card.appendChild(poster);
