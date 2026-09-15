@@ -9,7 +9,7 @@
 
       @font-face {
         font-family: "Cat Song";
-        src: url("./assets/Cat Song.otf") format("opentype");
+        src: url("../assets/Cat Song.otf") format("opentype");
         font-weight: normal;
         font-style: normal;
         font-display: swap;
@@ -208,7 +208,6 @@
         margin: 0;
         display: -webkit-box;
         -webkit-line-clamp: 4;
-        line-clamp: 4;
         -webkit-box-orient: vertical;
         overflow: hidden;
         font-family: "Roboto", serif;
@@ -356,18 +355,21 @@
 
       async function fetchMovies(query) {
         const endpoints = [];
+        const isLocalDev =
+          window.location.hostname === "localhost" ||
+          window.location.hostname === "127.0.0.1" ||
+          window.location.port === "3000";
 
-        if (window.location.port === "3000") {
-          endpoints.push(query
-            ? `/api/movies?query=${encodeURIComponent(query)}`
-            : "/api/movies");
-        } else {
+        const sameOriginUrl = query
+          ? `/api/movies?query=${encodeURIComponent(query)}`
+          : "/api/movies";
+
+        endpoints.push(sameOriginUrl);
+
+        if (isLocalDev) {
           endpoints.push(query
             ? `http://127.0.0.1:3000/api/movies?query=${encodeURIComponent(query)}`
             : "http://127.0.0.1:3000/api/movies");
-          endpoints.push(query
-            ? `/api/movies?query=${encodeURIComponent(query)}`
-            : "/api/movies");
         }
 
         let lastError = null;
