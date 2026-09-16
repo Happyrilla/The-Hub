@@ -156,8 +156,8 @@
 
       .movie-grid {
         display: grid;
-        grid-template-columns: repeat(7, minmax(110px, 1fr));
-        gap: 14px;
+        grid-template-columns: repeat(6, minmax(110px, 1fr));
+        gap: 22px;
       }
 
       .movie-card {
@@ -250,7 +250,7 @@
         <a href="../" style="margin-left: 10px;"> <i class="fa-regular fa-face-smile"></i> The Hub</a>
         <a href="../sub-sites/games.html"><span><i class="fa-solid fa-gamepad" style="font-size: 30px;"></i> Games</span></a>
         <a href="../sub-sites/links.html"><i class="fa-solid fa-link"></i> Links</a>
-        <a href="../sub-sites/media.html"><i class="fa-solid fa-tv"></i> Media</a>
+        <a href="../sub-sites/media.html"><i class="fa-solid fa-tv"></i> Media (Old Version)</a>
         <a href="../sub-sites/settings.html"> <i class="fa-solid fa-gear"></i> Settings</a>
       </div>
       <div class="controls">
@@ -404,16 +404,16 @@
 
         try {
           setStatus(query
-            ? `Loading TMDB results for “${query}”…`
-            : "Loading popular TMDB movies…");
+            ? `Loading results for “${query}”…`
+            : "Loading popular movies…");
 
           const tmdbResults = await fetchMovies(query);
           renderMovies(tmdbResults);
           setStatus(query
-            ? `Showing TMDB results for “${query}”.`
-            : "Showing popular TMDB movies.");
+            ? `Showing results for “${query}”.`
+            : "Showing popular movies.");
         } catch (error) {
-          movieGrid.innerHTML = '<div class="empty">Unable to load TMDB results right now.</div>';
+          movieGrid.innerHTML = '<div class="empty">Unable to load results right now.</div>';
           setStatus(`Error Fetching Movies: ${error.message}`, true);
         }
       }
