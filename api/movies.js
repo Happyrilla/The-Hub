@@ -73,9 +73,13 @@ export default async function handler(req, res) {
   }
 
   try {
+    const recentDate = new Date();
+    recentDate.setFullYear(recentDate.getFullYear() - 5);
+    const recentMoviesCutoff = recentDate.toISOString().slice(0, 10);
+
     const endpoint = query
       ? `https://api.themoviedb.org/3/search/multi?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}&include_adult=false&language=en-US&page=1`
-      : `https://api.themoviedb.org/3/trending/all/day?api_key=${TMDB_API_KEY}&language=en-US&page=1`;
+      : `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&sort_by=popularity.desc&include_adult=false&language=en-US&primary_release_date.gte=${recentMoviesCutoff}&page=1`;
 
     const tmdbResponse = await fetch(endpoint);
 
