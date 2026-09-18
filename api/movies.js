@@ -4,6 +4,7 @@ const fallbackMovies = [
   {
     id: 603,
     title: 'The Matrix',
+    media_type: 'movie',
     release_date: '1999-03-31',
     overview: 'A hacker learns that reality is a simulation and joins a rebellion to free humanity.',
     poster_path: '/f89U3ADr1oiB1s9GkdPOEpXUkQ3.jpg'
@@ -11,6 +12,7 @@ const fallbackMovies = [
   {
     id: 550,
     title: 'Fight Club',
+    media_type: 'movie',
     release_date: '1999-10-15',
     overview: 'An insomniac office worker and a devil-may-care soap maker form an underground fight club.',
     poster_path: '/bptfVGEQuv6vDTIMVCHjJ9Dz8PX.jpg'
@@ -18,9 +20,26 @@ const fallbackMovies = [
   {
     id: 299536,
     title: 'Avengers: Infinity War',
+    media_type: 'movie',
     release_date: '2018-04-27',
     overview: 'The Avengers and their allies must be willing to sacrifice all to defeat the powerful Thanos.',
     poster_path: '/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg'
+  },
+  {
+    id: 1396,
+    name: 'Breaking Bad',
+    media_type: 'tv',
+    first_air_date: '2008-01-20',
+    overview: 'A chemistry teacher turned meth kingpin spirals into a criminal empire while trying to provide for his family.',
+    poster_path: '/3xnWaLQjelJDDF7LT1WBo6f4BRe.jpg'
+  },
+  {
+    id: 2316,
+    name: 'The Office',
+    media_type: 'tv',
+    first_air_date: '2005-03-24',
+    overview: 'A documentary-style look at the everyday lives of office employees at the Dunder Mifflin paper company.',
+    poster_path: '/7DJKHzAi83BmQrWLrHX5P8YcJwG.jpg'
   }
 ];
 
@@ -32,7 +51,7 @@ function getFallbackMovies(query = '') {
   }
 
   return fallbackMovies.filter((movie) => {
-    const haystack = `${movie.title} ${movie.overview}`.toLowerCase();
+    const haystack = `${movie.title || movie.name} ${movie.overview}`.toLowerCase();
     return haystack.includes(normalized);
   });
 }
@@ -55,8 +74,8 @@ export default async function handler(req, res) {
 
   try {
     const endpoint = query
-      ? `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}&include_adult=false&language=en-US&page=1`
-      : `https://api.themoviedb.org/3/movie/popular?api_key=${TMDB_API_KEY}&language=en-US&page=1`;
+      ? `https://api.themoviedb.org/3/search/multi?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}&include_adult=false&language=en-US&page=1`
+      : `https://api.themoviedb.org/3/trending/all/day?api_key=${TMDB_API_KEY}&language=en-US&page=1`;
 
     const tmdbResponse = await fetch(endpoint);
 
@@ -69,9 +88,10 @@ export default async function handler(req, res) {
     }
 
     const data = await tmdbResponse.json();
-    return res.json((data.results || []).slice(0, 20));
+    const results = (data.results || []).filter((item) => item && (item.media_type === 'movie' || item.media_type === 'tv'));
+    return res.json(results.slice(0, 20));
   } catch (error) {
-    console.error('Failed to fetch TMDB movies:', error);
+    console.error('Failed to fetch TMDB media:', error);
     return res.json(getFallbackMovies(query));
   }
 }
