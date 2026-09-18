@@ -282,6 +282,8 @@
       ];
 
       function normalizeMovie(movie) {
+        const mediaType = movie.media_type || (movie.first_air_date ? "tv" : "movie");
+
         return {
           title: movie.title || movie.name || "Untitled",
           year: (movie.release_date || movie.first_air_date || "").slice(0, 4) || "Unknown",
@@ -289,7 +291,8 @@
           poster: movie.poster_path
             ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
             : "https://placehold.co/500x750/111827/ffffff?text=No+Poster",
-          cinemaId: movie.id || null
+          cinemaId: movie.id || null,
+          mediaType
         };
       }
 
@@ -328,8 +331,9 @@
 
           card.addEventListener("click", () => {
             const query = encodeURIComponent(movie.title);
+            const mediaPath = movie.mediaType === "tv" ? "tv" : "movie";
             const cinemaUrl = movie.cinemaId
-              ? `https://cinemaos.live/watch/movie/${movie.cinemaId}`
+              ? `https://cinemaos.live/watch/${mediaPath}/${movie.cinemaId}`
               : `https://cinemaos.live/search?q=${query}`;
 
             window.location.href = cinemaUrl;
