@@ -119,13 +119,18 @@ export default async function handler(req, res) {
     let results = [];
 
     if (query) {
-      // Search mode
-      const searchEndpoint = `https://api.themoviedb.org/3/search/multi?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}&include_adult=false&language=en-US&page=1`;
-      const searchResponse = await fetch(searchEndpoint);
-
-      if (searchResponse.ok) {
-        const searchData = await searchResponse.json();
-        results = (searchData.results || []).filter(isSupportedMedia);
+      // Search mode - fetch multiple pages for search
+      for (let page = 1; page <= 3; page++) {
+        const searchEndpoint = `https://api.themoviedb.org/3/search/multi?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}&include_adult=false&language=en-US&page=${page}`;
+        try {
+          const searchResponse = await fetch(searchEndpoint);
+          if (searchResponse.ok) {
+            const searchData = await searchResponse.json();
+            results.push(...(searchData.results || []).filter(isSupportedMedia));
+          }
+        } catch (e) {
+          console.error(`Search page ${page} error:`, e);
+        }
       }
     } else {
       // Trending mode - fetch both movies and TV
