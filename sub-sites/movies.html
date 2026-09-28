@@ -162,9 +162,8 @@
 
       .movie-grid {
         display: grid;
-        grid-template-columns: repeat(8, minmax(110px, 1fr));
+        grid-template-columns: repeat(6, minmax(110px, 1fr));
         gap: 22px;
-        margin-bottom: 30px;
       }
 
       .movie-card {
@@ -229,19 +228,7 @@
       .action-container {
         display: flex;
         justify-content: center;
-        gap: 12px;
-        margin-bottom: 40px;
-      }
-
-      .action-container button {
-        padding: 16px 32px;
-        font-size: 1.05rem;
-      }
-
-      @media (max-width: 1400px) {
-        .movie-grid {
-          grid-template-columns: repeat(7, minmax(110px, 1fr));
-        }
+        margin: 24px 0 40px;
       }
 
       @media (max-width: 1100px) {
@@ -257,10 +244,6 @@
 
         .movie-grid {
           grid-template-columns: repeat(3, minmax(110px, 1fr));
-        }
-
-        .action-container {
-          flex-direction: column;
         }
 
         body {
@@ -293,7 +276,7 @@
 
       <div id="status" class="status"></div>
       <div id="movieGrid" class="movie-grid"></div>
-      <div class="action-container" id="actionContainer" style="display: none;">
+      <div id="actionContainer" class="action-container" style="display: none;">
         <button id="actionBtn" type="button">Show More</button>
       </div>
     </div>
@@ -306,52 +289,52 @@
       const actionBtn = document.getElementById("actionBtn");
       const actionContainer = document.getElementById("actionContainer");
 
-      let allResults = [];
-      let displayedCount = 0;
       const ITEMS_PER_LOAD = 24;
+      let allResults = [];
+      let visibleCount = 0;
 
       const fallbackMovies = [
         {
-          title: "The Shawshank Redemption",
-          year: "1994",
-          overview: "Two imprisoned men bond over years, finding redemption through acts of common decency.",
-          poster: "https://image.tmdb.org/t/p/w500/9O7gLzmreU0nGkIB1PhoBmarJFE.jpg",
+          title: "The Matrix",
+          year: "1999",
+          overview: "A hacker learns that reality is a simulation and joins a rebellion.",
+          poster: "https://image.tmdb.org/t/p/w500/f89U3ADr1oiB1s9GkdPOEpXUkQ3.jpg",
           mediaType: "movie"
         },
         {
-          title: "The Dark Knight",
-          year: "2008",
-          overview: "Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
-          poster: "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haI0xvwi.jpg",
+          title: "Fight Club",
+          year: "1999",
+          overview: "An insomniac office worker and a soap maker start an underground fight club.",
+          poster: "https://image.tmdb.org/t/p/w500/bptfVGEQuv6vDTIMVCHjJ9Dz8PX.jpg",
           mediaType: "movie"
         },
         {
-          title: "Inception",
-          year: "2010",
-          overview: "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea.",
-          poster: "https://image.tmdb.org/t/p/w500/oYm8jklQHumRMjw2d5SsBhFrsEd.jpg",
+          title: "Avengers: Infinity War",
+          year: "2018",
+          overview: "The Avengers must sacrifice everything to stop Thanos.",
+          poster: "https://image.tmdb.org/t/p/w500/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg",
           mediaType: "movie"
         },
         {
           title: "Breaking Bad",
           year: "2008",
-          overview: "A high school chemistry teacher turned meth cooker partners with a former student to produce crystal meth.",
-          poster: "https://image.tmdb.org/t/p/w500/ggFHVNu6YYI5L9pIbPbP0mkwDNm.jpg",
+          overview: "A chemistry teacher turns into a meth kingpin.",
+          poster: "https://image.tmdb.org/t/p/w500/3xnWaLQjelJDDF7LT1WBo6f4BRe.jpg",
           mediaType: "tv"
         },
         {
-          title: "Stranger Things",
-          year: "2016",
-          overview: "When a young boy vanishes, a small town uncovers a mystery involving secret experiments, terrifying supernatural forces, and one strange little girl.",
-          poster: "https://image.tmdb.org/t/p/w500/49WJfeN0moxb9IPfGn8AIqMGskD.jpg",
+          title: "The Office",
+          year: "2005",
+          overview: "The everyday life of paper company employees is documented.",
+          poster: "https://image.tmdb.org/t/p/w500/7DJKHzAi83BmQrWLrHX5P8YcJwG.jpg",
           mediaType: "tv"
         },
         {
-          title: "The Lord of the Rings: The Fellowship of the Ring",
-          year: "2001",
-          overview: "A meek Hobbit from the Shire and eight companions set out on a journey to destroy the One Ring and save Middle-earth from darkness.",
-          poster: "https://image.tmdb.org/t/p/w500/6oom5QYQ2yQTMJIbnvbkBL9cHo6.jpg",
-          mediaType: "movie"
+          title: "Game of Thrones",
+          year: "2011",
+          overview: "Noble families fight for power over the Seven Kingdoms.",
+          poster: "https://image.tmdb.org/t/p/w500/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg",
+          mediaType: "tv"
         }
       ];
 
@@ -375,86 +358,89 @@
         statusEl.style.color = isError ? "#fca5a5" : "#a1a1aa";
       }
 
-      function createMovieCard(movie) {
-        const card = document.createElement("article");
-        card.className = "movie-card";
-        card.setAttribute("role", "button");
-        card.tabIndex = 0;
-
-        const poster = document.createElement("div");
-        poster.className = "poster-wrap";
-        poster.innerHTML = `<img src="${movie.poster}" alt="${movie.title} poster" loading="lazy"/>`;
-
-        const body = document.createElement("div");
-        body.className = "movie-body";
-        body.innerHTML = `
-          <h2 class="movie-title">${movie.title}</h2>
-          <div class="movie-meta">${movie.year}</div>
-        `;
-
-        card.appendChild(poster);
-        card.appendChild(body);
-
-        card.addEventListener("click", () => {
-          const query = encodeURIComponent(movie.title);
-          const mediaPath = movie.mediaType === "tv" ? "tv" : "movie";
-          const cinemaUrl = movie.cinemaId
-            ? `https://cinemaos.live/watch/${mediaPath}/${movie.cinemaId}`
-            : `https://cinemaos.live/search?q=${query}`;
-
-          window.location.href = cinemaUrl;
-        });
-
-        card.addEventListener("keydown", (event) => {
-          if (event.key === "Enter" || event.key === " ") {
-            event.preventDefault();
-            card.click();
-          }
-        });
-
-        return card;
-      }
-
-      function renderMovies(movies, append = false) {
-        if (!append) {
-          movieGrid.innerHTML = "";
-          displayedCount = 0;
+      function updateActionButton() {
+        if (!allResults.length) {
+          actionContainer.style.display = "none";
+          return;
         }
 
-        if (!movies.length && displayedCount === 0) {
+        const hasMoreThanInitial = allResults.length > ITEMS_PER_LOAD;
+        const isAtEnd = visibleCount >= allResults.length;
+
+        if (hasMoreThanInitial && isAtEnd) {
+          actionBtn.textContent = "Show Less";
+          actionBtn.dataset.mode = "show-less";
+          actionContainer.style.display = "flex";
+          return;
+        }
+
+        if (hasMoreThanInitial && !isAtEnd) {
+          actionBtn.textContent = "Show More";
+          actionBtn.dataset.mode = "show-more";
+          actionContainer.style.display = "flex";
+          return;
+        }
+
+        actionContainer.style.display = "none";
+      }
+
+      function renderVisibleResults() {
+        movieGrid.innerHTML = "";
+
+        if (!allResults.length) {
           movieGrid.innerHTML = '<div class="empty">No movies matched your search.</div>';
           actionContainer.style.display = "none";
           return;
         }
 
-        const moviesToAdd = movies.slice(displayedCount, displayedCount + ITEMS_PER_LOAD);
-        moviesToAdd.forEach((movie) => {
-          movieGrid.appendChild(createMovieCard(movie));
+        const visibleMovies = allResults.slice(0, visibleCount);
+
+        visibleMovies.forEach((movie) => {
+          const card = document.createElement("article");
+          card.className = "movie-card";
+          card.setAttribute("role", "button");
+          card.tabIndex = 0;
+
+          const poster = document.createElement("div");
+          poster.className = "poster-wrap";
+          poster.innerHTML = `<img src="${movie.poster}" alt="${movie.title} poster" loading="lazy"/>`;
+
+          const body = document.createElement("div");
+          body.className = "movie-body";
+          body.innerHTML = `
+            <h2 class="movie-title">${movie.title}</h2>
+            <div class="movie-meta">${movie.year}</div>
+          `;
+
+          card.appendChild(poster);
+          card.appendChild(body);
+
+          card.addEventListener("click", () => {
+            const query = encodeURIComponent(movie.title);
+            const mediaPath = movie.mediaType === "tv" ? "tv" : "movie";
+            const cinemaUrl = movie.cinemaId
+              ? `https://cinemaos.live/watch/${mediaPath}/${movie.cinemaId}`
+              : `https://cinemaos.live/search?q=${query}`;
+
+            window.location.href = cinemaUrl;
+          });
+
+          card.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              card.click();
+            }
+          });
+
+          movieGrid.appendChild(card);
         });
 
-        displayedCount += moviesToAdd.length;
-
-        // Update button state
-        if (displayedCount < movies.length) {
-          // More movies to show
-          actionContainer.style.display = "flex";
-          actionBtn.textContent = "Show More";
-          actionBtn.disabled = false;
-          actionBtn.setAttribute("data-mode", "show-more");
-        } else if (displayedCount === movies.length && displayedCount > ITEMS_PER_LOAD) {
-          // All movies shown and we expanded at least once
-          actionContainer.style.display = "flex";
-          actionBtn.textContent = "Show Less";
-          actionBtn.disabled = false;
-          actionBtn.setAttribute("data-mode", "show-less");
-        } else {
-          // Initial load with all results visible
-          actionContainer.style.display = "none";
-        }
+        updateActionButton();
       }
 
-      async function fetchMovies(query, limit = 96) {
+      async function fetchMovies(query) {
         const endpoints = [];
+        const limit = 200;
         const isLocalDev =
           window.location.hostname === "localhost" ||
           window.location.hostname === "127.0.0.1" ||
@@ -485,12 +471,11 @@
 
             const results = await response.json();
             const normalized = Array.isArray(results) ? results.map(normalizeMovie) : [];
-
             if (normalized.length) {
               return normalized;
             }
 
-            lastError = new Error("API returned empty results");
+            lastError = new Error("No results returned from API.");
           } catch (error) {
             lastError = error;
           }
@@ -499,41 +484,45 @@
         return fallbackMovies;
       }
 
-      async function handleSearch() {
-        const query = movieSearch.value.trim();
-        actionBtn.disabled = true;
-
-        try {
-          setStatus(query
-            ? `Loading results for "${query}"…`
-            : "Loading popular movies and shows…");
-
-          allResults = await fetchMovies(query, 96);
-          renderMovies(allResults, false);
-          setStatus(query
-            ? `Showing results for "${query}".`
-            : "Showing popular movies and TV shows.");
-        } catch (error) {
-          movieGrid.innerHTML = '<div class="empty">Unable to load results right now.</div>';
-          setStatus(`Error Fetching Movies: ${error.message}`, true);
-          actionContainer.style.display = "none";
+      function handleShowMoreLess() {
+        if (!allResults.length) {
+          return;
         }
+
+        const mode = actionBtn.dataset.mode;
+
+        if (mode === "show-less") {
+          visibleCount = ITEMS_PER_LOAD;
+        } else {
+          visibleCount = Math.min(visibleCount + ITEMS_PER_LOAD, allResults.length);
+        }
+
+        renderVisibleResults();
       }
 
-      function handleAction() {
-        const mode = actionBtn.getAttribute("data-mode");
+      async function handleSearch() {
+        const query = movieSearch.value.trim();
 
-        if (mode === "show-more") {
-          // Load more movies
-          renderMovies(allResults, true);
-        } else if (mode === "show-less") {
-          // Reset to initial 24
-          renderMovies(allResults, false);
+        try {
+          setStatus(query ? `Loading results for “${query}”…` : "Loading popular movies…");
+
+          const results = await fetchMovies(query);
+          allResults = results;
+          visibleCount = Math.min(ITEMS_PER_LOAD, allResults.length);
+          renderVisibleResults();
+
+          setStatus(query ? `Showing results for “${query}”.` : "Showing popular movies.");
+        } catch (error) {
+          allResults = [];
+          visibleCount = 0;
+          movieGrid.innerHTML = '<div class="empty">Unable to load results right now.</div>';
+          actionContainer.style.display = "none";
+          setStatus(`Error Fetching Movies: ${error.message}`, true);
         }
       }
 
       searchBtn.addEventListener("click", handleSearch);
-      actionBtn.addEventListener("click", handleAction);
+      actionBtn.addEventListener("click", handleShowMoreLess);
 
       movieSearch.addEventListener("keydown", (event) => {
         if (event.key === "Enter") {
@@ -541,7 +530,7 @@
         }
       });
 
-      setStatus("Loading popular movies and shows…");
+      setStatus("Loading popular movies…");
       handleSearch();
     </script>
   </body>
