@@ -226,13 +226,14 @@
         box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.25);
       }
 
-      .load-more-container {
+      .action-container {
         display: flex;
         justify-content: center;
+        gap: 12px;
         margin-bottom: 40px;
       }
 
-      #loadMoreBtn {
+      .action-container button {
         padding: 16px 32px;
         font-size: 1.05rem;
       }
@@ -256,6 +257,10 @@
 
         .movie-grid {
           grid-template-columns: repeat(3, minmax(110px, 1fr));
+        }
+
+        .action-container {
+          flex-direction: column;
         }
 
         body {
@@ -288,8 +293,8 @@
 
       <div id="status" class="status"></div>
       <div id="movieGrid" class="movie-grid"></div>
-      <div class="load-more-container" id="loadMoreContainer" style="display: none;">
-        <button id="loadMoreBtn" type="button">Load More</button>
+      <div class="action-container" id="actionContainer" style="display: none;">
+        <button id="actionBtn" type="button">Show More</button>
       </div>
     </div>
 
@@ -298,8 +303,8 @@
       const searchBtn = document.getElementById("searchBtn");
       const movieGrid = document.getElementById("movieGrid");
       const statusEl = document.getElementById("status");
-      const loadMoreBtn = document.getElementById("loadMoreBtn");
-      const loadMoreContainer = document.getElementById("loadMoreContainer");
+      const actionBtn = document.getElementById("actionBtn");
+      const actionContainer = document.getElementById("actionContainer");
 
       let allResults = [];
       let displayedCount = 0;
@@ -418,7 +423,7 @@
 
         if (!movies.length && displayedCount === 0) {
           movieGrid.innerHTML = '<div class="empty">No movies matched your search.</div>';
-          loadMoreContainer.style.display = "none";
+          actionContainer.style.display = "none";
           return;
         }
 
@@ -429,16 +434,26 @@
 
         displayedCount += moviesToAdd.length;
 
-        // Show/hide load more button
+        // Update button state
         if (displayedCount < movies.length) {
-          loadMoreContainer.style.display = "flex";
-          loadMoreBtn.disabled = false;
+          // More movies to show
+          actionContainer.style.display = "flex";
+          actionBtn.textContent = "Show More";
+          actionBtn.disabled = false;
+          actionBtn.setAttribute("data-mode", "show-more");
+        } else if (displayedCount === movies.length && displayedCount > ITEMS_PER_LOAD) {
+          // All movies shown and we expanded at least once
+          actionContainer.style.display = "flex";
+          actionBtn.textContent = "Show Less";
+          actionBtn.disabled = false;
+          actionBtn.setAttribute("data-mode", "show-less");
         } else {
-          loadMoreContainer.style.display = "none";
+          // Initial load with all results visible
+          actionContainer.style.display = "none";
         }
       }
 
-      async function fetchMovies(query, limit = 48) {
+      async function fetchMovies(query, limit = 96) {
         const endpoints = [];
         const isLocalDev =
           window.location.hostname === "localhost" ||
@@ -486,7 +501,7 @@
 
       async function handleSearch() {
         const query = movieSearch.value.trim();
-        loadMoreBtn.disabled = true;
+        actionBtn.disabled = true;
 
         try {
           setStatus(query
@@ -501,17 +516,24 @@
         } catch (error) {
           movieGrid.innerHTML = '<div class="empty">Unable to load results right now.</div>';
           setStatus(`Error Fetching Movies: ${error.message}`, true);
-          loadMoreContainer.style.display = "none";
+          actionContainer.style.display = "none";
         }
       }
 
-      function handleLoadMore() {
-        loadMoreBtn.disabled = true;
-        renderMovies(allResults, true);
+      function handleAction() {
+        const mode = actionBtn.getAttribute("data-mode");
+
+        if (mode === "show-more") {
+          // Load more movies
+          renderMovies(allResults, true);
+        } else if (mode === "show-less") {
+          // Reset to initial 24
+          renderMovies(allResults, false);
+        }
       }
 
       searchBtn.addEventListener("click", handleSearch);
-      loadMoreBtn.addEventListener("click", handleLoadMore);
+      actionBtn.addEventListener("click", handleAction);
 
       movieSearch.addEventListener("keydown", (event) => {
         if (event.key === "Enter") {
