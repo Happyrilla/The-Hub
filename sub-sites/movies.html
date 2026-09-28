@@ -146,6 +146,12 @@
         opacity: 0.96;
       }
 
+      button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+      }
+
       .status {
         min-height: 24px;
         margin: 0 4px 18px;
@@ -158,6 +164,7 @@
         display: grid;
         grid-template-columns: repeat(8, minmax(110px, 1fr));
         gap: 22px;
+        margin-bottom: 30px;
       }
 
       .movie-card {
@@ -219,6 +226,17 @@
         box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.25);
       }
 
+      .load-more-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 40px;
+      }
+
+      #loadMoreBtn {
+        padding: 16px 32px;
+        font-size: 1.05rem;
+      }
+
       @media (max-width: 1400px) {
         .movie-grid {
           grid-template-columns: repeat(7, minmax(110px, 1fr));
@@ -270,6 +288,9 @@
 
       <div id="status" class="status"></div>
       <div id="movieGrid" class="movie-grid"></div>
+      <div class="load-more-container" id="loadMoreContainer" style="display: none;">
+        <button id="loadMoreBtn" type="button">Load More</button>
+      </div>
     </div>
 
     <script>
@@ -277,6 +298,12 @@
       const searchBtn = document.getElementById("searchBtn");
       const movieGrid = document.getElementById("movieGrid");
       const statusEl = document.getElementById("status");
+      const loadMoreBtn = document.getElementById("loadMoreBtn");
+      const loadMoreContainer = document.getElementById("loadMoreContainer");
+
+      let allResults = [];
+      let displayedCount = 0;
+      const ITEMS_PER_LOAD = 24;
 
       const fallbackMovies = [
         {
@@ -343,69 +370,75 @@
         statusEl.style.color = isError ? "#fca5a5" : "#a1a1aa";
       }
 
-      function renderMovies(movies) {
-        movieGrid.innerHTML = "";
+      function createMovieCard(movie) {
+        const card = document.createElement("article");
+        card.className = "movie-card";
+        card.setAttribute("role", "button");
+        card.tabIndex = 0;
 
-        if (!movies.length) {
+        const poster = document.createElement("div");
+        poster.className = "poster-wrap";
+        poster.innerHTML = `<img src="${movie.poster}" alt="${movie.title} poster" loading="lazy"/>`;
+
+        const body = document.createElement("div");
+        body.className = "movie-body";
+        body.innerHTML = `
+          <h2 class="movie-title">${movie.title}</h2>
+          <div class="movie-meta">${movie.year}</div>
+        `;
+
+        card.appendChild(poster);
+        card.appendChild(body);
+
+        card.addEventListener("click", () => {
+          const query = encodeURIComponent(movie.title);
+          const mediaPath = movie.mediaType === "tv" ? "tv" : "movie";
+          const cinemaUrl = movie.cinemaId
+            ? `https://cinemaos.live/watch/${mediaPath}/${movie.cinemaId}`
+            : `https://cinemaos.live/search?q=${query}`;
+
+          window.location.href = cinemaUrl;
+        });
+
+        card.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            card.click();
+          }
+        });
+
+        return card;
+      }
+
+      function renderMovies(movies, append = false) {
+        if (!append) {
+          movieGrid.innerHTML = "";
+          displayedCount = 0;
+        }
+
+        if (!movies.length && displayedCount === 0) {
           movieGrid.innerHTML = '<div class="empty">No movies matched your search.</div>';
+          loadMoreContainer.style.display = "none";
           return;
         }
 
-        movies.forEach((movie) => {
-          const card = document.createElement("article");
-          card.className = "movie-card";
-          card.setAttribute("role", "button");
-          card.tabIndex = 0;
-
-          const poster = document.createElement("div");
-          poster.className = "poster-wrap";
-          poster.innerHTML = `<img src="${movie.poster}" alt="${movie.title} poster" loading="lazy"/>`;
-
-          const body = document.createElement("div");
-          body.className = "movie-body";
-          body.innerHTML = `
-            <h2 class="movie-title">${movie.title}</h2>
-            <div class="movie-meta">${movie.year}</div>
-          `;
-
-          card.appendChild(poster);
-          card.appendChild(body);
-
-          card.addEventListener("click", () => {
-            const query = encodeURIComponent(movie.title);
-            const mediaPath = movie.mediaType === "tv" ? "tv" : "movie";
-            const cinemaUrl = movie.cinemaId
-              ? `https://cinemaos.live/watch/${mediaPath}/${movie.cinemaId}`
-              : `https://cinemaos.live/search?q=${query}`;
-
-            window.location.href = cinemaUrl;
-          });
-
-          card.addEventListener("keydown", (event) => {
-            if (event.key === "Enter" || event.key === " ") {
-              event.preventDefault();
-              card.click();
-            }
-          });
-
-          movieGrid.appendChild(card);
+        const moviesToAdd = movies.slice(displayedCount, displayedCount + ITEMS_PER_LOAD);
+        moviesToAdd.forEach((movie) => {
+          movieGrid.appendChild(createMovieCard(movie));
         });
-      }
 
-      function searchLocalMovies(query) {
-        const normalizedQuery = query.trim().toLowerCase();
+        displayedCount += moviesToAdd.length;
 
-        if (!normalizedQuery) {
-          return fallbackMovies;
+        // Show/hide load more button
+        if (displayedCount < movies.length) {
+          loadMoreContainer.style.display = "flex";
+          loadMoreBtn.disabled = false;
+        } else {
+          loadMoreContainer.style.display = "none";
         }
-
-        return fallbackMovies.filter((movie) => {
-          const haystack = `${movie.title} ${movie.overview}`.toLowerCase();
-          return haystack.includes(normalizedQuery);
-        });
       }
 
-      async function fetchMovies(query) {
+      async function fetchMovies(query, limit = 48) {
         const endpoints = [];
         const isLocalDev =
           window.location.hostname === "localhost" ||
@@ -413,15 +446,15 @@
           window.location.port === "3000";
 
         const sameOriginUrl = query
-          ? `/api/movies?query=${encodeURIComponent(query)}&limit=24`
-          : "/api/movies?limit=24";
+          ? `/api/movies?query=${encodeURIComponent(query)}&limit=${limit}`
+          : `/api/movies?limit=${limit}`;
 
         endpoints.push(sameOriginUrl);
 
         if (isLocalDev) {
           endpoints.push(query
-            ? `http://127.0.0.1:3000/api/movies?query=${encodeURIComponent(query)}&limit=24`
-            : "http://127.0.0.1:3000/api/movies?limit=24");
+            ? `http://127.0.0.1:3000/api/movies?query=${encodeURIComponent(query)}&limit=${limit}`
+            : `http://127.0.0.1:3000/api/movies?limit=${limit}`);
         }
 
         let lastError = null;
@@ -453,24 +486,32 @@
 
       async function handleSearch() {
         const query = movieSearch.value.trim();
+        loadMoreBtn.disabled = true;
 
         try {
           setStatus(query
-            ? `Loading results for “${query}”…`
+            ? `Loading results for "${query}"…`
             : "Loading popular movies and shows…");
 
-          const tmdbResults = await fetchMovies(query);
-          renderMovies(tmdbResults);
+          allResults = await fetchMovies(query, 96);
+          renderMovies(allResults, false);
           setStatus(query
-            ? `Showing results for “${query}”.`
+            ? `Showing results for "${query}".`
             : "Showing popular movies and TV shows.");
         } catch (error) {
           movieGrid.innerHTML = '<div class="empty">Unable to load results right now.</div>';
           setStatus(`Error Fetching Movies: ${error.message}`, true);
+          loadMoreContainer.style.display = "none";
         }
       }
 
+      function handleLoadMore() {
+        loadMoreBtn.disabled = true;
+        renderMovies(allResults, true);
+      }
+
       searchBtn.addEventListener("click", handleSearch);
+      loadMoreBtn.addEventListener("click", handleLoadMore);
 
       movieSearch.addEventListener("keydown", (event) => {
         if (event.key === "Enter") {
