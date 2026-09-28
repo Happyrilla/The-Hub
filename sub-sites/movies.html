@@ -156,7 +156,7 @@
 
       .movie-grid {
         display: grid;
-        grid-template-columns: repeat(6, minmax(110px, 1fr));
+        grid-template-columns: repeat(8, minmax(110px, 1fr));
         gap: 22px;
       }
 
@@ -219,6 +219,12 @@
         box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.25);
       }
 
+      @media (max-width: 1400px) {
+        .movie-grid {
+          grid-template-columns: repeat(7, minmax(110px, 1fr));
+        }
+      }
+
       @media (max-width: 1100px) {
         .movie-grid {
           grid-template-columns: repeat(5, minmax(110px, 1fr));
@@ -274,10 +280,46 @@
 
       const fallbackMovies = [
         {
-          title: "huh",
-          year: "2022",
-          overview: "hehe",
-          poster: "https://image.tmdb.org/t/p/w500/74xTEw8w2JYJr4P1JxWyCuxk0IT.jpg"
+          title: "The Shawshank Redemption",
+          year: "1994",
+          overview: "Two imprisoned men bond over years, finding redemption through acts of common decency.",
+          poster: "https://image.tmdb.org/t/p/w500/9O7gLzmreU0nGkIB1PhoBmarJFE.jpg",
+          mediaType: "movie"
+        },
+        {
+          title: "The Dark Knight",
+          year: "2008",
+          overview: "Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
+          poster: "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haI0xvwi.jpg",
+          mediaType: "movie"
+        },
+        {
+          title: "Inception",
+          year: "2010",
+          overview: "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea.",
+          poster: "https://image.tmdb.org/t/p/w500/oYm8jklQHumRMjw2d5SsBhFrsEd.jpg",
+          mediaType: "movie"
+        },
+        {
+          title: "Breaking Bad",
+          year: "2008",
+          overview: "A high school chemistry teacher turned meth cooker partners with a former student to produce crystal meth.",
+          poster: "https://image.tmdb.org/t/p/w500/ggFHVNu6YYI5L9pIbPbP0mkwDNm.jpg",
+          mediaType: "tv"
+        },
+        {
+          title: "Stranger Things",
+          year: "2016",
+          overview: "When a young boy vanishes, a small town uncovers a mystery involving secret experiments, terrifying supernatural forces, and one strange little girl.",
+          poster: "https://image.tmdb.org/t/p/w500/49WJfeN0moxb9IPfGn8AIqMGskD.jpg",
+          mediaType: "tv"
+        },
+        {
+          title: "The Lord of the Rings: The Fellowship of the Ring",
+          year: "2001",
+          overview: "A meek Hobbit from the Shire and eight companions set out on a journey to destroy the One Ring and save Middle-earth from darkness.",
+          poster: "https://image.tmdb.org/t/p/w500/6oom5QYQ2yQTMJIbnvbkBL9cHo6.jpg",
+          mediaType: "movie"
         }
       ];
 
@@ -371,15 +413,15 @@
           window.location.port === "3000";
 
         const sameOriginUrl = query
-          ? `/api/movies?query=${encodeURIComponent(query)}`
-          : "/api/movies";
+          ? `/api/movies?query=${encodeURIComponent(query)}&limit=24`
+          : "/api/movies?limit=24";
 
         endpoints.push(sameOriginUrl);
 
         if (isLocalDev) {
           endpoints.push(query
-            ? `http://127.0.0.1:3000/api/movies?query=${encodeURIComponent(query)}`
-            : "http://127.0.0.1:3000/api/movies");
+            ? `http://127.0.0.1:3000/api/movies?query=${encodeURIComponent(query)}&limit=24`
+            : "http://127.0.0.1:3000/api/movies?limit=24");
         }
 
         let lastError = null;
@@ -394,13 +436,19 @@
             }
 
             const results = await response.json();
-            return (results || []).map(normalizeMovie);
+            const normalized = Array.isArray(results) ? results.map(normalizeMovie) : [];
+
+            if (normalized.length) {
+              return normalized;
+            }
+
+            lastError = new Error("API returned empty results");
           } catch (error) {
             lastError = error;
           }
         }
 
-        throw lastError || new Error("Error Fetching Movies: (Failed to fetch movies).");
+        return fallbackMovies;
       }
 
       async function handleSearch() {
@@ -409,13 +457,13 @@
         try {
           setStatus(query
             ? `Loading results for “${query}”…`
-            : "Loading popular movies…");
+            : "Loading popular movies and shows…");
 
           const tmdbResults = await fetchMovies(query);
           renderMovies(tmdbResults);
           setStatus(query
             ? `Showing results for “${query}”.`
-            : "Showing popular movies.");
+            : "Showing popular movies and TV shows.");
         } catch (error) {
           movieGrid.innerHTML = '<div class="empty">Unable to load results right now.</div>';
           setStatus(`Error Fetching Movies: ${error.message}`, true);
@@ -430,7 +478,7 @@
         }
       });
 
-      setStatus("Loading popular movies…");
+      setStatus("Loading popular movies and shows…");
       handleSearch();
     </script>
   </body>
