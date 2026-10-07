@@ -31,6 +31,7 @@ How to add facts:
 
 5. Open the original repo and click the button on the yellow banner
 ![Yellow banner with a green button](https://docs.github.com/assets/cb-34097/mw-1440/images/help/pull_requests/pull-request-compare-pull-request.webp)
+It may not look exactly like this, but almost the same
 
 6. Name your pull request your fact and press the "Create pull request" button
 
