@@ -1,0 +1,42 @@
+name: Validate JSON
+
+on:
+  pull_request:
+    paths:
+      - '**/*.json'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate JSON files
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const path = require('path');
+
+          function walk(dir) {
+            for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+              const fullPath = path.join(dir, entry.name);
+              if (entry.isDirectory()) {
+                if (entry.name === '.git' || entry.name === 'node_modules') continue;
+                walk(fullPath);
+              } else if (entry.isFile() && fullPath.endsWith('.json')) {
+                try {
+                  const text = fs.readFileSync(fullPath, 'utf8');
+                  JSON.parse(text);
+                  console.log('✓', fullPath);
+                } catch (error) {
+                  console.error('✗', fullPath);
+                  console.error(error.message);
+                  process.exit(1);
+                }
+              }
+            }
+          }
+
+          walk(process.cwd());
+          console.log('All JSON files are valid.');
+          NODE
