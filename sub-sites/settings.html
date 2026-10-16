@@ -43,6 +43,17 @@
         .thing:hover {
             transform: scale(1.2);
         }
+
+        .blocks-setting {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        #blocksStatus {
+            max-width: 24ch;
+            text-align: center;
+        }
     </style>
     <style>
         body {
@@ -99,6 +110,14 @@
             </form>
         </div>
         <div class="thingy">
+            <h2 style="margin-top: 20px;">Background Blocks</h2>
+            <label class="blocks-setting">
+                <input type="checkbox" id="blocksToggle">
+                Enable background effect
+            </label>
+            <p id="blocksStatus" aria-live="polite">Off by default. Changes apply when you open or reload the home page.</p>
+        </div>
+        <div class="thingy">
             <h2 style="margin-top: 20px;">Help</h2>
             <form style="display: flex; flex-direction: column;">
                 <a href="./settings/tab.html" class="form">Tab Customizer Help</a>
@@ -151,6 +170,41 @@
         });
 
         function clipboard(value) { navigator.clipboard.writeText(value); }
+    </script>
+    <script>
+        const blocksToggle = document.getElementById("blocksToggle");
+        const blocksStatus = document.getElementById("blocksStatus");
+        let blocksEnabled = false;
+
+        try {
+            blocksEnabled = localStorage.getItem("blocks") === "ok";
+            blocksToggle.checked = blocksEnabled;
+            blocksStatus.textContent = blocksEnabled
+                ? "Background effect is on. Changes apply when you open or reload the home page."
+                : "Off by default. Changes apply when you open or reload the home page.";
+        } catch (error) {
+            blocksToggle.disabled = true;
+            blocksStatus.textContent = "Could not read local storage, so the background effect stays off.";
+            console.warn("[Blocks] Could not read localStorage in settings.", error);
+        }
+
+        blocksToggle.addEventListener("change", function () {
+            try {
+                if (blocksToggle.checked) {
+                    localStorage.setItem("blocks", "ok");
+                } else {
+                    localStorage.removeItem("blocks");
+                }
+                blocksEnabled = blocksToggle.checked;
+                blocksStatus.textContent = blocksToggle.checked
+                    ? "Background effect is on. Changes apply when you open or reload the home page."
+                    : "Background effect is off. Changes apply when you open or reload the home page.";
+            } catch (error) {
+                blocksToggle.checked = blocksEnabled;
+                blocksStatus.textContent = "Could not save this setting; the previous setting is unchanged.";
+                console.warn("[Blocks] Could not save localStorage setting.", error);
+            }
+        });
     </script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {

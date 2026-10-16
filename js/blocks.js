@@ -1,6 +1,15 @@
 "use strict";
 
 (function initBlocksBackground() {
+  try {
+    const blocksSetting = localStorage.getItem("blocks");
+    console.info('[Blocks] localStorage["blocks"] =', blocksSetting);
+    if (blocksSetting !== "ok") return;
+  } catch (error) {
+    console.warn("[Blocks] Could not read localStorage; background effect disabled.", error);
+    return;
+  }
+
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
   const canvas = document.createElement("canvas");
@@ -30,7 +39,7 @@
   }
 
   const CELL = 16;
-  const REACH = 2.6;
+  const REACH = 2.5;
   const MAX_LIT = 300;
   const FADE_IN = 160;
   const FADE_OUT = 750;
