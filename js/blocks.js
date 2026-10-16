@@ -10,6 +10,27 @@
     return;
   }
 
+  function readNumberSetting(key, fallback, min, max, step) {
+    try {
+      const stored = localStorage.getItem(key);
+      if (stored === null) return fallback;
+      const value = Number(stored);
+      const stepPosition = (value - min) / step;
+      if (
+        Number.isFinite(value) &&
+        value >= min &&
+        value <= max &&
+        Math.abs(stepPosition - Math.round(stepPosition)) < 1e-8
+      ) {
+        return value;
+      }
+      console.warn("[Blocks] Invalid " + key + " setting; using default.", stored);
+    } catch (error) {
+      console.warn("[Blocks] Could not read " + key + "; using default.", error);
+    }
+    return fallback;
+  }
+
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
   const canvas = document.createElement("canvas");
@@ -38,8 +59,8 @@
     return;
   }
 
-  const CELL = 16;
-  const REACH = 2.5;
+  const CELL = readNumberSetting("blocksCell", 16, 4, 64, 1);
+  const REACH = readNumberSetting("blocksReach", 2.5, 0.5, 8, 0.1);
   const MAX_LIT = 300;
   const FADE_IN = 160;
   const FADE_OUT = 750;

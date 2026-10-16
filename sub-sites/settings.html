@@ -50,9 +50,19 @@
             gap: 8px;
         }
 
-        #blocksStatus {
-            max-width: 24ch;
-            text-align: center;
+        .blocks-options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            width: min(100%, 220px);
+            margin-top: 12px;
+        }
+
+        .blocks-options label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
         }
     </style>
     <style>
@@ -115,7 +125,14 @@
                 <input type="checkbox" id="blocksToggle">
                 Enable background effect
             </label>
-            <p id="blocksStatus" aria-live="polite">Off by default. Changes apply when you open or reload the home page.</p>
+            <div class="blocks-options">
+                <label for="blocksCell">Cell size
+                    <input class="form" type="number" id="blocksCell" min="4" max="64" step="1" aria-label="Cell size in pixels">
+                </label>
+                <label for="blocksReach">Reach
+                    <input class="form" type="number" id="blocksReach" min="0.5" max="8" step="0.1" aria-label="Effect reach">
+                </label>
+            </div>
         </div>
         <div class="thingy">
             <h2 style="margin-top: 20px;">Help</h2>
@@ -173,18 +190,32 @@
     </script>
     <script>
         const blocksToggle = document.getElementById("blocksToggle");
-        const blocksStatus = document.getElementById("blocksStatus");
+        const blocksCell = document.getElementById("blocksCell");
+        const blocksReach = document.getElementById("blocksReach");
+        const blockOptions = [
+            { input: blocksCell, key: "blocksCell", fallback: 16, min: 4, max: 64, step: 1, value: 16 },
+            { input: blocksReach, key: "blocksReach", fallback: 2.5, min: 0.5, max: 8, step: 0.1, value: 2.5 }
+        ];
         let blocksEnabled = false;
 
         try {
             blocksEnabled = localStorage.getItem("blocks") === "ok";
             blocksToggle.checked = blocksEnabled;
-            blocksStatus.textContent = blocksEnabled
-                ? "Background effect is on. Changes apply when you open or reload the home page."
-                : "Off by default. Changes apply when you open or reload the home page.";
+            blockOptions.forEach(function (option) {
+                const saved = Number(localStorage.getItem(option.key));
+                const valid = Number.isFinite(saved) &&
+                    saved >= option.min &&
+                    saved <= option.max &&
+                    Math.abs((saved - option.min) / option.step - Math.round((saved - option.min) / option.step)) < 1e-8;
+                option.value = valid ? saved : option.fallback;
+                option.input.value = String(option.value);
+            });
         } catch (error) {
             blocksToggle.disabled = true;
-            blocksStatus.textContent = "Could not read local storage, so the background effect stays off.";
+            blockOptions.forEach(function (option) {
+                option.input.disabled = true;
+                option.input.value = String(option.fallback);
+            });
             console.warn("[Blocks] Could not read localStorage in settings.", error);
         }
 
@@ -196,14 +227,32 @@
                     localStorage.removeItem("blocks");
                 }
                 blocksEnabled = blocksToggle.checked;
-                blocksStatus.textContent = blocksToggle.checked
-                    ? "Background effect is on. Changes apply when you open or reload the home page."
-                    : "Background effect is off. Changes apply when you open or reload the home page.";
             } catch (error) {
                 blocksToggle.checked = blocksEnabled;
-                blocksStatus.textContent = "Could not save this setting; the previous setting is unchanged.";
                 console.warn("[Blocks] Could not save localStorage setting.", error);
             }
+        });
+
+        blockOptions.forEach(function (option) {
+            option.input.addEventListener("change", function () {
+                const value = Number(option.input.value);
+                const valid = Number.isFinite(value) &&
+                    value >= option.min &&
+                    value <= option.max &&
+                    Math.abs((value - option.min) / option.step - Math.round((value - option.min) / option.step)) < 1e-8;
+                if (!valid) {
+                    console.warn("[Blocks] Value must be between " + option.min + " and " + option.max + ".");
+                    option.input.value = String(option.value);
+                    return;
+                }
+                try {
+                    localStorage.setItem(option.key, String(value));
+                    option.value = value;
+                } catch (error) {
+                    console.warn("[Blocks] Could not save " + option.key + " to localStorage.", error);
+                    option.input.value = String(option.value);
+                }
+            });
         });
     </script>
     <script>
