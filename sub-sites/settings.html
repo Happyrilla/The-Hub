@@ -126,6 +126,10 @@
                 <input type="checkbox" id="blocksToggle">
                 Enable background effect
             </label>
+            <label class="blocks-setting">
+                <input type="checkbox" id="blocksForegroundToggle">
+                Show blocks in front (kinda cursed)
+            </label>
             <div class="blocks-options">
                 <label for="blocksCell">Cell size
                     <input class="form" type="number" id="blocksCell" min="4" max="64" step="1" aria-label="Cell size in pixels">
@@ -191,6 +195,7 @@
     </script>
     <script>
         const blocksToggle = document.getElementById("blocksToggle");
+        const blocksForegroundToggle = document.getElementById("blocksForegroundToggle");
         const blocksCell = document.getElementById("blocksCell");
         const blocksReach = document.getElementById("blocksReach");
         const blockOptions = [
@@ -198,10 +203,13 @@
             { input: blocksReach, key: "blocksReach", fallback: 2.5, min: 0.5, max: 8, step: 0.1, value: 2.5 }
         ];
         let blocksEnabled = false;
+        let blocksForegroundEnabled = false;
 
         try {
             blocksEnabled = localStorage.getItem("blocks") === "ok";
             blocksToggle.checked = blocksEnabled;
+            blocksForegroundEnabled = localStorage.getItem("blocksForeground") === "ok";
+            blocksForegroundToggle.checked = blocksForegroundEnabled;
             blockOptions.forEach(function (option) {
                 const saved = Number(localStorage.getItem(option.key));
                 const valid = Number.isFinite(saved) &&
@@ -213,6 +221,7 @@
             });
         } catch (error) {
             blocksToggle.disabled = true;
+            blocksForegroundToggle.disabled = true;
             blockOptions.forEach(function (option) {
                 option.input.disabled = true;
                 option.input.value = String(option.fallback);
@@ -231,6 +240,23 @@
             } catch (error) {
                 blocksToggle.checked = blocksEnabled;
                 console.warn("[Blocks] Could not save localStorage setting.", error);
+            }
+        });
+
+        blocksForegroundToggle.addEventListener("change", function () {
+            try {
+                if (blocksForegroundToggle.checked) {
+                    localStorage.setItem("blocksForeground", "ok");
+                } else {
+                    localStorage.removeItem("blocksForeground");
+                }
+                blocksForegroundEnabled = blocksForegroundToggle.checked;
+                window.dispatchEvent(new CustomEvent("blocksForegroundChange", {
+                    detail: blocksForegroundEnabled
+                }));
+            } catch (error) {
+                blocksForegroundToggle.checked = blocksForegroundEnabled;
+                console.warn("[Blocks] Could not save foreground setting.", error);
             }
         });
 

@@ -1,10 +1,12 @@
 "use strict";
 
 (function initBlocksBackground() {
+  let blocksForeground = false;
   try {
     const blocksSetting = localStorage.getItem("blocks");
     console.info('[Blocks] localStorage["blocks"] =', blocksSetting);
     if (blocksSetting !== "ok") return;
+    blocksForeground = localStorage.getItem("blocksForeground") === "ok";
   } catch (error) {
     console.warn("[Blocks] Could not read localStorage; background effect disabled.", error);
     return;
@@ -41,16 +43,30 @@
   const styles = document.createElement("style");
   styles.textContent = `
     body { isolation: isolate; }
+    :where(body.blocks-foreground) :is(h1, h2, h3, h4, h5, h6, p, a, span, strong, em, b, i, small, li, dt, dd, label, button, legend, summary, td, th, figcaption, blockquote, pre, code, textarea, [contenteditable="true"]) {
+      position: relative;
+      z-index: 2;
+    }
     #blocks-background {
       position: fixed;
       inset: 0;
-      z-index: -1;
+      z-index: ${blocksForeground ? 1 : -1};
       width: 100vw;
       height: 100vh;
       pointer-events: none;
     }
   `;
   document.head.appendChild(styles);
+
+  function setBlocksForeground(enabled) {
+    document.body.classList.toggle("blocks-foreground", enabled);
+    canvas.style.zIndex = enabled ? "1" : "-1";
+  }
+
+  setBlocksForeground(blocksForeground);
+  window.addEventListener("blocksForegroundChange", event => {
+    setBlocksForeground(event.detail === true);
+  });
 
   const ctx = canvas.getContext("2d");
   if (!ctx) {
