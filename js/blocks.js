@@ -61,7 +61,7 @@
 
   const CELL = readNumberSetting("blocksCell", 16, 4, 64, 1);
   const REACH = readNumberSetting("blocksReach", 2.5, 0.5, 8, 0.1);
-  const MAX_LIT = 300;
+  const MAX_LIT = Math.max(1, Math.round(300 * (16 / CELL) ** 2));
   const FADE_IN = 160;
   const FADE_OUT = 750;
   const TINTS = [72, 65, 58, 51, 44];
@@ -91,7 +91,7 @@
 
   function colourFor(row) {
     const t = rows > 1 ? row / (rows - 1) : 0;
-    const hue = t < 0.5 ? 30 + 380 * t : 220 - 190 * (t - 0.5);
+    const hue = t * 360;
     const tint = TINTS[Math.floor(Math.random() * TINTS.length)];
     return `hsl(${Math.round(hue)} 94% ${tint}%)`;
   }
