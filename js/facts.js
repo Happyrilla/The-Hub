@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
           }
         } else {
           if (isGameFact(randomQuote)) {
-            fetch("../sub-sites/games.html")
+            fetch("/g")
               .then((response) => response.text())
               .then((html) => {
                 const doc = new DOMParser().parseFromString(html, "text/html");

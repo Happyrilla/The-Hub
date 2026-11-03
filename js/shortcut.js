@@ -9,13 +9,13 @@ function enableShortcuts() {
         if (key === 'h') {
             window.location.href = hub;
         } else if (key === 'g') {
-            window.location.href = hub + '/sub-sites/games.html';
+            window.location.href = hub + '/g';
         } else if (key === 'l') {
-            window.location.href = hub + '/sub-sites/links.html';n
+            window.location.href = hub + '/l';n
         } else if (key === 'm') {
             window.location.href = hub + '/sub-sites/media.html';
         } else if (key === 's') {
-            window.location.href = hub + '/sub-sites/settings.html';
+            window.location.href = hub + '/s';
         } else if (key === 'd') {
             window.location.href = hub + '/sub-sites/dashboard.html';
         }
