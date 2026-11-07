@@ -14,16 +14,6 @@
             document.head.appendChild(s);
         }
     </script>
-    <script>
-        try {
-            var path = window.location.pathname || '';
-            if (path.indexOf('index.html') !== -1) {
-                window.location.replace('https://the-hubb.vercel.app/');
-            }
-        } catch (e) {
-            console.error(e);
-        }
-    </script>
     <script src="js/facts.js"></script>
     <link rel="stylesheet" href="./style.css" />
     <link rel="icon" type="image/png" href="https://www.gstatic.com/images/branding/searchlogo/ico/favicon.ico" />
@@ -49,12 +39,12 @@
     </div>
     <a style="transform: translate(-50%, -50%); top: 98%; left: 6%; position: absolute;">happyrilla was here</a>
     <div class="req"><button class="reqbtn" onclick="window.location.href='./sub-sites/gamesreq.html'">Find an error?</button></div>
-    <script>if (!hostname.endsWith('vercel.app')) {
-        document.querySelector('[src="/"]').src = "./index.html";
-        document.querySelector('[src="/g"]').src = "./sub-sites/games.html";
-        document.querySelector('[src="/l"]').src = "./sub-sites/links.html";
-        document.querySelector('[src="/m"]').src = "./sub-sites/movies.html";
-        document.querySelector('[src="/s"]').src = "./sub-sites/settings.html";
+    <script>if (!window.location.hostname.endsWith('vercel.app')) {
+        document.querySelector('a[href="/"]').href = "./index.html";
+        document.querySelector('a[href="/g"]').href = "./sub-sites/games.html";
+        document.querySelector('a[href="/l"]').href = "./sub-sites/links.html";
+        document.querySelector('a[href="/m"]').href = "./sub-sites/movies.html";
+        document.querySelector('a[href="/s"]').href = "./sub-sites/settings.html";
         
     };
     </script>
