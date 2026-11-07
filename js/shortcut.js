@@ -22,14 +22,20 @@ function enableShortcuts() {
     });
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+function initializeShortcuts() {
     const local = localStorage.getItem('shortcut?');
     if (local === 'true') {
         enableShortcuts();
     } else {
         console.log('Shortcuts are not Activated');
     }
-});
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeShortcuts, { once: true });
+} else {
+    initializeShortcuts();
+}
 
 function on() {
     localStorage.setItem('shortcut?', 'true');

@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", (event) => {
+function applyCustomization() {
     let idk = localStorage.getItem("title")
     let favi = localStorage.getItem("favicon")
     function setTitle(value) { document.title = value; localStorage.setItem("title", value) }
@@ -14,4 +14,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
     } else {
         setfavicon(favi)
     }
-})
+}
+
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", applyCustomization, { once: true });
+} else {
+    applyCustomization();
+}
