@@ -3,6 +3,7 @@
     { "source": "/g", "destination": "/sub-sites/games.html" },
     { "source": "/l", "destination": "/sub-sites/links.html" },
     { "source": "/m", "destination": "/sub-sites/movies.html" },
-    { "source": "/s", "destination": "/sub-sites/settings.html" }
+    { "source": "/s", "destination": "/sub-sites/settings.html" },
+    { "source": "/d", "destination": "/sub-sites/dashboard.html" }
   ]
 }
