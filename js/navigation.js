@@ -9,7 +9,7 @@
 </div>`;
 
     function injectNavigation() {
-        if (!document.getElementById("sub")) {
+        if (!document.getElementById("sub") && !document.body.hasAttribute("data-no-nav")) {
             document.body.insertAdjacentHTML("afterbegin", navigation);
         }
     }
