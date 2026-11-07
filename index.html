@@ -49,5 +49,14 @@
     </div>
     <a style="transform: translate(-50%, -50%); top: 98%; left: 6%; position: absolute;">happyrilla was here</a>
     <div class="req"><button class="reqbtn" onclick="window.location.href='./sub-sites/gamesreq.html'">Find an error?</button></div>
+    <script>if (!hostname.endsWith('vercel.app')) {
+        document.querySelector('[src="/"]').src = "./index.html";
+        document.querySelector('[src="/g"]').src = "./sub-sites/games.html";
+        document.querySelector('[src="/l"]').src = "./sub-sites/links.html";
+        document.querySelector('[src="/m"]').src = "./sub-sites/movies.html";
+        document.querySelector('[src="/s"]').src = "./sub-sites/settings.html";
+        
+    };
+    </script>
 </body>
 </html>
