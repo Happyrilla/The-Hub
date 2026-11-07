@@ -3,7 +3,8 @@ const js = [
   "blocks.js",
   "navigation.js",
   "shortcut.js",
-  "panic.js"
+  "panic.js",
+  "replace.js"
 ]
 
 const mainScript = document.currentScript;
