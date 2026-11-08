@@ -1,0 +1,5 @@
+Redirect 301 /g /sub-sites/games.html
+Redirect 301 /l /sub-sites/links.html
+Redirect 301 /m /sub-sites/movies.html
+Redirect 301 /s /sub-sites/settings.html
+Redirect 301 /d /sub-sites/dashboard.html
