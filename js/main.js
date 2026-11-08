@@ -4,7 +4,8 @@ const js = [
   "navigation.js",
   "shortcut.js",
   "panic.js",
-  "replace.js"
+  "replace.js",
+  "hair.js"
 ]
 
 const mainScript = document.currentScript;
