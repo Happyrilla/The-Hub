@@ -3,8 +3,8 @@ function getRandomInt(min, max) {
 }
 
 if (getRandomInt(1, 2) === 1) {
-  if (window.location.hostname.endsWith('vercel.app')) {
-    const size = getRandomInt(200, 300);
+  if (!window.location.hostname.endsWith('.github.io')) {
+    const size = getRandomInt(200, 500);
     const img = document.createElement('img');
     img.src = "/assets/hair.png";
     img.width = size;
@@ -13,6 +13,7 @@ if (getRandomInt(1, 2) === 1) {
     img.style.left = `${getRandomInt(0, window.innerWidth - size)}px`;
     img.style.top = `${getRandomInt(0, window.innerHeight - size)}px`;
     img.style.pointerEvents = 'none';
+    img.style.transform = `rotate(${getRandomInt(-180, 180)}deg)`;
     document.body.appendChild(img);
   }
 }
