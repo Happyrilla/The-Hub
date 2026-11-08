@@ -1,5 +1,5 @@
 if (!window.location.hostname.endsWith('vercel.app')) {
-    if (!window.location.hostname.includes('sub-sites')) {
+    if (!window.location.pathname.includes('/sub-sites/')) {
         document.querySelector('a[href="/g"]').href = "./sub-sites/games.html";
         document.querySelector('a[href="/l"]').href = "./sub-sites/links.html";
         document.querySelector('a[href="/m"]').href = "./sub-sites/movies.html";
