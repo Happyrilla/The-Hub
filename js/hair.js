@@ -4,7 +4,7 @@ function getRandomInt(min, max) {
 
 if (getRandomInt(1, 2) === 1) {
   if (window.location.hostname.endsWith('vercel.app')) {
-    const size = getRandomInt(50, 200);
+    const size = getRandomInt(200, 300);
     const img = document.createElement('img');
     img.src = "/assets/hair.png";
     img.width = size;
