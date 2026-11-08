@@ -2,9 +2,9 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-if (getRandomInt(1, 2) === 1) {
+if (getRandomInt(1, 20) === 1) {
   if (!window.location.hostname.endsWith('.github.io')) {
-    const size = getRandomInt(200, 500);
+    const size = getRandomInt(200, 350);
     const img = document.createElement('img');
     img.src = "/assets/hair.png";
     img.width = size;
