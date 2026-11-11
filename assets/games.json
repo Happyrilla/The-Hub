@@ -1,50 +1,242 @@
 [
-    { "name": "Bloons Tower Defense 1", "image": "../games and ruffle/btd1/btd1 logo.png", "link": "../games and ruffle/btd1/btd1.html" },
-    { "name": "Bloons Tower Defense 3", "image": "../games and ruffle/btd3/btd3 logo.png", "link": "../games and ruffle/btd3/btd3.html" },
-    { "name": "Bloons Tower Defense 5", "image": "../games and ruffle/btd5/btd5 logo.png", "link": "../games and ruffle/btd5/btd5.html" },
-    { "name": "Escaping The Prison", "image": "../games and ruffle/prison/prison logo.png", "link": "../games and ruffle/prison/prison.html" },
-    { "name": "Fleeing The Complex", "image": "../games and ruffle/complex/complex logo.png", "link": "../games and ruffle/complex/complex.html" },
-    { "name": "Airship", "image": "../games and ruffle/airship/airship logo.png", "link": "../games and ruffle/airship/airship.html" },
-    { "name": "Stealing The Diamond", "image": "../games and ruffle/diamond/diamond logo.png", "link": "../games and ruffle/diamond/diamond.html" },
-    { "name": "Fancy Pants Adventures 2", "image": "../games and ruffle/fpa/Fpa logo.png", "link": "../games and ruffle/fpa/fpa.html" },
-    { "name": "Fancy Pants Adventures", "image": "../games and ruffle/fancypants/fancypants logo.png", "link": "../games and ruffle/fancypants/fancypants.html" },
-    { "name": "Hobo", "image": "../games and ruffle/hobo/hobo logo.png", "link": "../games and ruffle/hobo/hobo.html" },
-    { "name": "Hobo 2", "image": "../games and ruffle/hobo2/hobo2 logo.png", "link": "../games and ruffle/hobo2/hobo2.html" },
-    { "name": "Hobo 3", "image": "../games and ruffle/hobo3/hobo3 logo.png", "link": "../games and ruffle/hobo3/hobo3.html" },
-    { "name": "Hobo 4", "image": "../games and ruffle/hobo4/hobo4 logo.png", "link": "../games and ruffle/hobo4/hobo4.html" },
-    { "name": "Hobo 5", "image": "../games and ruffle/hobo5/hobo5 logo.png", "link": "../games and ruffle/hobo5/hobo5.html" },
-    { "name": "Super Mario Bros", "image": "../games and ruffle/mario/mario.png", "link": "../games and ruffle/mario/mario.html" },
-    { "name": "Super Mario 63", "image": "../games and ruffle/supermario63/supermario63 background.png", "link": "../games and ruffle/supermario63/supermario63.html" },
-    { "name": "Super Mario 64", "image": "../games and ruffle/mar64/mar64.png", "link": "../games and ruffle/mar64/mar64.html" },
-    { "name": "Portal", "image": "../games and ruffle/portal/portal logo.png", "link": "../games and ruffle/portal/portal.html" },
-    { "name": "Quiz", "image": "../games and ruffle/quiz/quiz logo.png", "link": "../games and ruffle/quiz/quiz.html" },
-    { "name": "Flash Strike", "image": "../games and ruffle/strike/strike.png", "link": "../games and ruffle/strike/strike.html" },
-    { "name": "Cookie", "image": "../games and ruffle/cookie/cookie logo.png", "link": "../games and ruffle/cookie/cookie.html" },
-    { "name": "Moto 3XM", "image": "../games and ruffle/moto/moto logo.png", "link": "../games and ruffle/moto/moto.html" },
-    { "name": "Eaglercraft", "image": "../games and ruffle/eagle/eagle logo.png", "link": "../games and ruffle/eagle/eagle.html" },
-    { "name": "OVO", "image": "../games and ruffle/ovo/ovo logo.png", "link": "../games and ruffle/ovo/ovo.html" },
-    { "name": "Drive Mad", "image": "../games and ruffle/drivemad/drivemad logo.png", "link": "../games and ruffle/drivemad/drivemad.html" },
-    { "name": "Bitlife", "image": "../games and ruffle/bitlife/bitlife logo.png", "link": "../games and ruffle/bitlife/bitlife.html" },
-    { "name": "3X3 Obby", "image": "../games and ruffle/obby/obby.png", "link": "../games and ruffle/obby/obby.html" },
-    { "name": "Kawaii Shooter", "image": "../games and ruffle/shooter/shooter.png", "link": "../games and ruffle/shooter/shooter.html" },
-    { "name": "Drift", "image": "../games and ruffle/drift/drift logo.png", "link": "../games and ruffle/drift/drift.html" },
-    { "name": "Dog Life Simulator", "image": "../games and ruffle/dogsim/dogsim logo.png", "link": "../games and ruffle/dogsim/dogsim.html" },
-    { "name": "Pokemon Red", "image": "../games and ruffle/pokred/pokred.png", "link": "../games and ruffle/pokred/pokred.html" },
-    { "name": "Pokemon Ruby", "image": "../games and ruffle/ruby/ruby.png", "link": "../games and ruffle/ruby/ruby.html" },
-    { "name": "Pokemon Platinum", "image": "../games and ruffle/platinum/platinum.png", "link": "../games and ruffle/platinum/platinum.html" },
-    { "name": "Tetris", "image": "../games and ruffle/tetris/tetris.png", "link": "../games and ruffle/tetris/tetris.html" },
-    { "name": "Donkey Kong Country", "image": "../games and ruffle/country/country.png", "link": "../games and ruffle/country/country.html" },
-    { "name": "Kirby Super Star", "image": "../games and ruffle/kirby/kirby.png", "link": "../games and ruffle/kirby/kirby.html" },
-    { "name": "Who Wants to Be a Millionaire", "image": "../games and ruffle/million/million.png", "link": "../games and ruffle/million/million.html" },
-    { "name": "Jive Machine", "image": "../games and ruffle/jive/jive.png", "link": "../games and ruffle/jive/jive.html" },
-    { "name": "Tomb Of The Mask", "image": "../games and ruffle/tomb/tomb.png", "link": "../games and ruffle/tomb/tomb.html" },
-    { "name": "Solar Smash", "image": "../games and ruffle/solar/solar.png", "link": "../games and ruffle/solar/solar.html" },
-    { "name": "Bottle Jump 3D", "image": "../games and ruffle/bottle/bottle.png", "link": "../games and ruffle/bottle/bottle.html" },
-    { "name": "Slope", "image": "../games and ruffle/slope/slope.png", "link": "../games and ruffle/slope/slope.html" },
-    { "name": "Baldi's Basics", "image": "../games and ruffle/baldi/baldi.png", "link": "../games and ruffle/baldi/baldi.html" },
-    { "name": "Getting Over It", "image": "../games and ruffle/getting/getting.png", "link": "../games and ruffle/getting/getting.html" },
-    { "name": "That's Not My Neighbor", "image": "../games and ruffle/neighbor/neighbor.png", "link": "../games and ruffle/neighbor/neighbor.html" },
-    { "name": "People Playground", "image": "../games and ruffle/people/people.png", "link": "../games and ruffle/people/people.html" },
-    { "name": "Undertale", "image": "../games and ruffle/undertale/undertale logo.png", "link": "../games and ruffle/undertale/undertale.html" },
-    { "name": "Deltarune", "image": "../games and ruffle/deltarune/deltarune logo.png", "link": "../games and ruffle/deltarune/deltarune.html" }
+  {
+    "image": "../games and ruffle/btd1/btd1 logo.png",
+    "link": "../games and ruffle/btd1/btd1.html",
+    "name": "Bloons Tower Defense 1"
+  },
+  {
+    "image": "../games and ruffle/btd3/btd3 logo.png",
+    "link": "../games and ruffle/btd3/btd3.html",
+    "name": "Bloons Tower Defense 3"
+  },
+  {
+    "image": "../games and ruffle/btd5/btd5 logo.png",
+    "link": "../games and ruffle/btd5/btd5.html",
+    "name": "Bloons Tower Defense 5"
+  },
+  {
+    "image": "../games and ruffle/prison/prison logo.png",
+    "link": "../games and ruffle/prison/prison.html",
+    "name": "Escaping The Prison"
+  },
+  {
+    "image": "../games and ruffle/complex/complex logo.png",
+    "link": "../games and ruffle/complex/complex.html",
+    "name": "Fleeing The Complex"
+  },
+  {
+    "image": "../games and ruffle/airship/airship logo.png",
+    "link": "../games and ruffle/airship/airship.html",
+    "name": "Airship"
+  },
+  {
+    "image": "../games and ruffle/diamond/diamond logo.png",
+    "link": "../games and ruffle/diamond/diamond.html",
+    "name": "Stealing The Diamond"
+  },
+  {
+    "image": "../games and ruffle/fpa/Fpa logo.png",
+    "link": "../games and ruffle/fpa/fpa.html",
+    "name": "Fancy Pants Adventures 2"
+  },
+  {
+    "image": "../games and ruffle/fancypants/fancypants logo.png",
+    "link": "../games and ruffle/fancypants/fancypants.html",
+    "name": "Fancy Pants Adventures"
+  },
+  {
+    "image": "../games and ruffle/hobo/hobo logo.png",
+    "link": "../games and ruffle/hobo/hobo.html",
+    "name": "Hobo"
+  },
+  {
+    "image": "../games and ruffle/hobo2/hobo2 logo.png",
+    "link": "../games and ruffle/hobo2/hobo2.html",
+    "name": "Hobo 2"
+  },
+  {
+    "image": "../games and ruffle/hobo3/hobo3 logo.png",
+    "link": "../games and ruffle/hobo3/hobo3.html",
+    "name": "Hobo 3"
+  },
+  {
+    "image": "../games and ruffle/hobo4/hobo4 logo.png",
+    "link": "../games and ruffle/hobo4/hobo4.html",
+    "name": "Hobo 4"
+  },
+  {
+    "image": "../games and ruffle/hobo5/hobo5 logo.png",
+    "link": "../games and ruffle/hobo5/hobo5.html",
+    "name": "Hobo 5"
+  },
+  {
+    "image": "../games and ruffle/mario/mario.png",
+    "link": "../games and ruffle/mario/mario.html",
+    "name": "Super Mario Bros"
+  },
+  {
+    "image": "../games and ruffle/supermario63/supermario63 background.png",
+    "link": "../games and ruffle/supermario63/supermario63.html",
+    "name": "Super Mario 63"
+  },
+  {
+    "image": "../games and ruffle/mar64/mar64.png",
+    "link": "../games and ruffle/mar64/mar64.html",
+    "name": "Super Mario 64"
+  },
+  {
+    "image": "../games and ruffle/portal/portal logo.png",
+    "link": "../games and ruffle/portal/portal.html",
+    "name": "Portal"
+  },
+  {
+    "image": "../games and ruffle/quiz/quiz logo.png",
+    "link": "../games and ruffle/quiz/quiz.html",
+    "name": "Quiz"
+  },
+  {
+    "image": "../games and ruffle/strike/strike.png",
+    "link": "../games and ruffle/strike/strike.html",
+    "name": "Flash Strike"
+  },
+  {
+    "image": "../games and ruffle/cookie/cookie logo.png",
+    "link": "../games and ruffle/cookie/cookie.html",
+    "name": "Cookie"
+  },
+  {
+    "image": "../games and ruffle/moto/moto logo.png",
+    "link": "../games and ruffle/moto/moto.html",
+    "name": "Moto 3XM"
+  },
+  {
+    "image": "../games and ruffle/eagle/eagle logo.png",
+    "link": "../games and ruffle/eagle/eagle.html",
+    "name": "Eaglercraft"
+  },
+  {
+    "image": "../games and ruffle/ovo/ovo logo.png",
+    "link": "../games and ruffle/ovo/ovo.html",
+    "name": "OVO"
+  },
+  {
+    "image": "../games and ruffle/drivemad/drivemad logo.png",
+    "link": "../games and ruffle/drivemad/drivemad.html",
+    "name": "Drive Mad"
+  },
+  {
+    "image": "../games and ruffle/bitlife/bitlife logo.png",
+    "link": "../games and ruffle/bitlife/bitlife.html",
+    "name": "Bitlife"
+  },
+  {
+    "image": "../games and ruffle/obby/obby.png",
+    "link": "../games and ruffle/obby/obby.html",
+    "name": "3X3 Obby"
+  },
+  {
+    "image": "../games and ruffle/shooter/shooter.png",
+    "link": "../games and ruffle/shooter/shooter.html",
+    "name": "Kawaii Shooter"
+  },
+  {
+    "image": "../games and ruffle/drift/drift logo.png",
+    "link": "../games and ruffle/drift/drift.html",
+    "name": "Drift"
+  },
+  {
+    "image": "../games and ruffle/dogsim/dogsim logo.png",
+    "link": "../games and ruffle/dogsim/dogsim.html",
+    "name": "Dog Life Simulator"
+  },
+  {
+    "image": "../games and ruffle/pokred/pokred.png",
+    "link": "../games and ruffle/pokred/pokred.html",
+    "name": "Pokemon Red"
+  },
+  {
+    "image": "../games and ruffle/ruby/ruby.png",
+    "link": "../games and ruffle/ruby/ruby.html",
+    "name": "Pokemon Ruby"
+  },
+  {
+    "image": "../games and ruffle/platinum/platinum.png",
+    "link": "../games and ruffle/platinum/platinum.html",
+    "name": "Pokemon Platinum"
+  },
+  {
+    "image": "../games and ruffle/tetris/tetris.png",
+    "link": "../games and ruffle/tetris/tetris.html",
+    "name": "Tetris"
+  },
+  {
+    "image": "../games and ruffle/country/country.png",
+    "link": "../games and ruffle/country/country.html",
+    "name": "Donkey Kong Country"
+  },
+  {
+    "image": "../games and ruffle/kirby/kirby.png",
+    "link": "../games and ruffle/kirby/kirby.html",
+    "name": "Kirby Super Star"
+  },
+  {
+    "image": "../games and ruffle/million/million.png",
+    "link": "../games and ruffle/million/million.html",
+    "name": "Who Wants to Be a Millionaire"
+  },
+  {
+    "image": "../games and ruffle/jive/jive.png",
+    "link": "../games and ruffle/jive/jive.html",
+    "name": "Jive Machine"
+  },
+  {
+    "image": "../games and ruffle/tomb/tomb.png",
+    "link": "../games and ruffle/tomb/tomb.html",
+    "name": "Tomb Of The Mask"
+  },
+  {
+    "image": "../games and ruffle/solar/solar.png",
+    "link": "../games and ruffle/solar/solar.html",
+    "name": "Solar Smash"
+  },
+  {
+    "image": "../games and ruffle/bottle/bottle.png",
+    "link": "../games and ruffle/bottle/bottle.html",
+    "name": "Bottle Jump 3D"
+  },
+  {
+    "image": "../games and ruffle/slope/slope.png",
+    "link": "../games and ruffle/slope/slope.html",
+    "name": "Slope"
+  },
+  {
+    "image": "../games and ruffle/baldi/baldi.png",
+    "link": "../games and ruffle/baldi/baldi.html",
+    "name": "Baldi's Basics"
+  },
+  {
+    "image": "../games and ruffle/getting/getting.png",
+    "link": "../games and ruffle/getting/getting.html",
+    "name": "Getting Over It"
+  },
+  {
+    "image": "../games and ruffle/neighbor/neighbor.png",
+    "link": "../games and ruffle/neighbor/neighbor.html",
+    "name": "That's Not My Neighbor"
+  },
+  {
+    "image": "../games and ruffle/people/people.png",
+    "link": "../games and ruffle/people/people.html",
+    "name": "People Playground"
+  },
+  {
+    "image": "../games and ruffle/undertale/undertale logo.png",
+    "link": "../games and ruffle/undertale/undertale.html",
+    "name": "Undertale"
+  },
+  {
+    "image": "../games and ruffle/deltarune/deltarune logo.png",
+    "link": "../games and ruffle/deltarune/deltarune.html",
+    "name": "Deltarune"
+  }
 ]
