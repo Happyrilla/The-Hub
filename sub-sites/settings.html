@@ -62,6 +62,9 @@
             justify-content: space-between;
             gap: 8px;
         }
+        input::placeholder {
+            color: white
+        }
     </style>
     <style>
         body {
@@ -91,6 +94,13 @@
             <form onsubmit="return false;" style="display: flex; flex-direction: column;">
                 <button onclick="setmedia('null')">Normal Movies</button>
                 <button onclick="setmedia('yes')">My Collection</button>
+            </form>
+        </div>
+        <div class="thingy">
+            <h2 style="margin-top: 20px;">Customize</h2>
+            <form style="display: flex; flex-direction: column;">
+                <h5 id="trans">Transparency Of The Nav Bar: 7/10</h5>
+                <input id="tranin" class="form" type="range" min="0" max="10" value="7" aria-label="Navigation bar transparency">
             </form>
         </div>
         <div class="thingy">
@@ -290,6 +300,29 @@
             } else {
                 localStorage.setItem("shortcut?", null);
         }}
+    </script>
+    <script>
+        const trans = document.getElementById("trans");
+        const tranin = document.getElementById("tranin");
+        const storedTransparency = localStorage.getItem("navtrans");
+        const initialTransparency = storedTransparency === null
+            ? 7
+            : Number(storedTransparency);
+        tranin.value = String(Number.isFinite(initialTransparency)
+            ? Math.min(10, Math.max(0, initialTransparency))
+            : 7);
+        trans.textContent = `Transparency Of The Nav Bar: ${tranin.value}/10`;
+
+        tranin.addEventListener("input", function () {
+            const sliderValue = Number(this.value);
+            const opacity = sliderValue / 10;
+            trans.textContent = `Transparency Of The Nav Bar: ${sliderValue}/10`;
+            localStorage.setItem("navtrans", String(sliderValue));
+            document.getElementById("sub")?.style.setProperty(
+                "--nav-opacity",
+                String(opacity)
+            );
+        });
     </script>
 </body>
 

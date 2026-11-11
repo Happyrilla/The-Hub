@@ -51,7 +51,8 @@
     margin: 0 auto;
     gap: 10rem;
     cursor: default;
-    opacity: 0.7;
+    opacity: var(--nav-opacity, 0.7);
+    transition: opacity 0.2s ease;
 }
 #sub:hover {
     opacity: 1;

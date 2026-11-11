@@ -12,6 +12,16 @@
         if (!document.getElementById("sub") && !document.body.hasAttribute("data-no-nav")) {
             document.body.insertAdjacentHTML("afterbegin", navigation);
         }
+
+        const nav = document.getElementById("sub");
+        if (nav) {
+            const storedValue = localStorage.getItem("navtrans");
+            const sliderValue = storedValue === null ? 7 : Number(storedValue);
+            const opacity = Number.isFinite(sliderValue)
+                ? Math.min(10, Math.max(0, sliderValue)) / 10
+                : 0.7;
+            nav.style.setProperty("--nav-opacity", String(opacity));
+        }
     }
 
     if (document.readyState === "loading") {
