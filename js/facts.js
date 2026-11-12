@@ -36,15 +36,18 @@ document.addEventListener("DOMContentLoaded", function () {
           }
         } else {
           if (isGameFact(randomQuote)) {
-            fetch("/g")
-              .then((response) => response.text())
-              .then((html) => {
-                const doc = new DOMParser().parseFromString(html, "text/html");
-                const gameCount = doc.querySelectorAll("img.gamesy").length;
+            fetch(`../assets/games.json`)
+              .then((response) => {
+                if (!response.ok) {
+                  throw new Error(`Failed to load games: ${response.status}`);
+                }
+                return response.json();
+              })
+              .then((games) => {
+                const gameCount = games.length;
 
                 factEl.textContent = gameFactText + " " + gameCount + " games";
 
-                // example: show it somewhere else
                 const el = document.getElementById("gameCount");
                 if (el) el.textContent = gameCount;
               })
