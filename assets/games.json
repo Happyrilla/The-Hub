@@ -230,6 +230,16 @@
     "name": "People Playground"
   },
   {
+    "image": "../games and ruffle/money/money.png",
+    "link": "../games and ruffle/money/money.html",
+    "name": "Bloodmoney"
+  },
+  {
+    "image": "../games and ruffle/wordle/wordle.png",
+    "link": "../games and ruffle/wordle/wordle.html",
+    "name": "Wordle"
+  },
+  {
     "image": "../games and ruffle/undertale/undertale logo.png",
     "link": "../games and ruffle/undertale/undertale.html",
     "name": "Undertale"
