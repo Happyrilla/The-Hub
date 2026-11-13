@@ -265,6 +265,11 @@
     "name": "Snow Rider 3D"
   },
   {
+    "image": "../games and ruffle/subway/subway.png",
+    "link": "../games and ruffle/subway/subway.html",
+    "name": "Subway Surfers"
+  },
+  {
     "image": "../games and ruffle/undertale/undertale logo.png",
     "link": "../games and ruffle/undertale/undertale.html",
     "name": "Undertale"
