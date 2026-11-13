@@ -100,6 +100,11 @@
     "name": "Flash Strike"
   },
   {
+    "image": "../games and ruffle/fly/fly.png",
+    "link": "../games and ruffle/fly/fly.html",
+    "name": "Learn To Fly"
+  },
+  {
     "image": "../games and ruffle/cookie/cookie logo.png",
     "link": "../games and ruffle/cookie/cookie.html",
     "name": "Cookie"
@@ -238,6 +243,26 @@
     "image": "../games and ruffle/wordle/wordle.png",
     "link": "../games and ruffle/wordle/wordle.html",
     "name": "Wordle"
+  },
+  {
+    "image": "../games and ruffle/hook/hook.png",
+    "link": "../games and ruffle/hook/hook.html",
+    "name": "Stickman Hook"
+  },
+  {
+    "image": "../games and ruffle/fnf/fnf.png",
+    "link": "../games and ruffle/fnf/fnf.html",
+    "name": "Friday Night Funkin FNF"
+  },
+  {
+    "image": "../games and ruffle/tunnel/tunnel.png",
+    "link": "../games and ruffle/tunnel/tunnel.html",
+    "name": "Tunnel Rush"
+  },
+  {
+    "image": "../games and ruffle/snow/snow.png",
+    "link": "../games and ruffle/snow/snow.html",
+    "name": "Snow Rider 3D"
   },
   {
     "image": "../games and ruffle/undertale/undertale logo.png",
