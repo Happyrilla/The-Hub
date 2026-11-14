@@ -4,11 +4,15 @@ if (!window.location.hostname.endsWith('vercel.app')) {
         document.querySelector('a[href="/l"]').href = "./sub-sites/links.html";
         document.querySelector('a[href="/m"]').href = "./sub-sites/movies.html";
         document.querySelector('a[href="/s"]').href = "./sub-sites/settings.html";
+        document.querySelector('a[href="/c"]').href = "./sub-sites/chat.html";
+        document.querySelector('a[href="/calc"]').href = "./sub-sites/calc.html";
     } else {
         document.querySelector('a[href="../"]').href = "../index.html";
         document.querySelector('a[href="/g"]').href = "./games.html";
         document.querySelector('a[href="/l"]').href = "./links.html";
         document.querySelector('a[href="/m"]').href = "./movies.html";
         document.querySelector('a[href="/s"]').href = "./settings.html";
+        document.querySelector('a[href="/c"]').href = "./chat.html";
+        document.querySelector('a[href="/calc"]').href = "./calc.html";
     }
 };

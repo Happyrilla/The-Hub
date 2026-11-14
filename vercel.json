@@ -4,6 +4,8 @@
     { "source": "/l", "destination": "/sub-sites/links.html" },
     { "source": "/m", "destination": "/sub-sites/movies.html" },
     { "source": "/s", "destination": "/sub-sites/settings.html" },
-    { "source": "/d", "destination": "/sub-sites/dashboard.html" }
+    { "source": "/d", "destination": "/sub-sites/dashboard.html" },
+    { "source": "/c", "destination": "/sub-sites/chat.html" },
+    { "source": "/calc", "destination": "/sub-sites/calc.html" }
   ]
 }
