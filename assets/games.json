@@ -245,6 +245,11 @@
     "name": "Wordle"
   },
   {
+    "image": "../games and ruffle/happy/happy.png",
+    "link": "../games and ruffle/happy/happy.html",
+    "name": "Happy Glass"
+  },
+  {
     "image": "../games and ruffle/hook/hook.png",
     "link": "../games and ruffle/hook/hook.html",
     "name": "Stickman Hook"
