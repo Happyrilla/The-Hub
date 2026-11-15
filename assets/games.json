@@ -270,6 +270,11 @@
     "name": "Subway Surfers"
   },
   {
+    "image": "../games and ruffle/bad/bad.png",
+    "link": "../games and ruffle/bad/bad.html",
+    "name": "Bad Time Simulator"
+  },
+  {
     "image": "../games and ruffle/undertale/undertale logo.png",
     "link": "../games and ruffle/undertale/undertale.html",
     "name": "Undertale"
