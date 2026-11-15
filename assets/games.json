@@ -70,6 +70,16 @@
     "name": "Hobo 5"
   },
   {
+    "image": "../games and ruffle/hobo5/hobo6.png",
+    "link": "../games and ruffle/hobo5/hobo6.html",
+    "name": "Hobo 6"
+  },
+  {
+    "image": "../games and ruffle/hobo5/hobo7.png",
+    "link": "../games and ruffle/hobo5/hobo7.html",
+    "name": "Hobo 7"
+  },
+  {
     "image": "../games and ruffle/mario/mario.png",
     "link": "../games and ruffle/mario/mario.html",
     "name": "Super Mario Bros"

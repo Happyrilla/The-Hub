@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hobo 6</title>
+    <link rel="icon" href="hobo6.png" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/19b444568b.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background-image: url('./hobo6.png');
+        }
+    </style>
+    <script>
+        window.RufflePlayer = window.RufflePlayer || {};
+        window.RufflePlayer.config = {
+            "autoplay": "on",
+            "warnOnUnsupportedContent": false
+        };
+    </script>
+
+    <script src="../ruffle/ruffle.js"></script>
+    <script>
+if (!location.hostname.endsWith("github.io")) {
+  var s = document.createElement("script");
+  s.defer = true;
+  s.src = "../../_vercel/insights/script.js";
+  document.head.appendChild(s);
+}
+</script>
+</head>
+
+<body style="margin:0; display:flex; justify-content:center; align-items:center; height:100vh;">
+    <a href="/g" style="position: absolute; top: 5%; left: 1%; text-decoration: none; border: none; font-size: 40px; display: flex; align-items: center; gap: 8px;">
+        <i class="fa-solid fa-left-long"></i> back
+    </a>
+    <div id="container">
+        <embed src="hobo6.swf" width="770" height="580" type="application/x-shockwave-flash"></embed>
+    </div>
+    <div>
+        <textarea id="textBox" placeholder="password saver input" style="resize: none; overflow: auto"></textarea>
+        <a style="font-weight: bold; font-size: 1rem; color: white;">password holder that saves!</a>
+    </div>
+    <script>
+        const ta = document.getElementById('textBox');
+        ta.value = localStorage.getItem('savedTextttttt') || '';
+        ta.addEventListener('input', () => {
+        localStorage.setItem('savedTextttttt', ta.value);
+        });
+    </script>
+</body>
+</html>
