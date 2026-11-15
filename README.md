@@ -1,13 +1,14 @@
-Welcome to The Hub.
+# The Hub
 
 
-This is just a hub of diffrent tools and games.
+![Site](https://img.shields.io/website?url=https%3A%2F%2Fthe-hubb.vercel.app)
+![GitHub repo size](https://img.shields.io/github/repo-size/happyrilla/The-Hub)
+![Games](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fthe-hubb.vercel.app%2Fassets%2Fgames.json&query=%24.length&label=Games)
 
-enjoy :)
 
+This is just a hub of diffrent apps, movies and games.
 
-here is the links to the page:
-
+## Links to The-Hub:
 
 [Link 1](https://basukabomberumpe-design.github.io/The-Hub/)
 
@@ -18,7 +19,7 @@ here is the links to the page:
 [Link 4](https://the-hub-xt1t.onrender.com/)
 
 
-How to add facts:
+## How to add facts
 
 
 1. [Fork](https://docs.github.com/en/pull-requests/how-tos/work-with-forks/fork-a-repo) this repo
@@ -36,3 +37,11 @@ It may not look exactly like this, but almost the same
 6. Name your pull request your fact and press the "Create pull request" button
 
 7. Wait for your fact to be accepted
+
+----------------------------------
+
+This is just a side project and never intended to be anything serious.
+
+Wish you all luck
+
+--happyrilla
