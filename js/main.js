@@ -10,6 +10,10 @@ const js = [
 
 const mainScript = document.currentScript;
 
+const vercelScript = document.createElement("script");
+vercelScript.src = new URL("vercel.js", mainScript.src).href;
+document.head.appendChild(vercelScript);
+
 function loadScripts() {
   js.forEach(file => {
     const script = document.createElement("script");
